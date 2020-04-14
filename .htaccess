@@ -1,0 +1,1 @@
+header always set x-frame-options "SAMEORIGIN"
