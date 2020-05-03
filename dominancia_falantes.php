@@ -8,7 +8,7 @@ $query_author = "		SELECT			A.author,
 								
 						FROM 		(                        
 										SELECT 		author, count(distinct id) AS count_id 
-										FROM 		2015_politics
+										FROM 		".$_GET['link_id']."
 										WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
 										GROUP BY 	author     
 										ORDER BY 	count_id desc
@@ -19,7 +19,7 @@ $query_author = "		SELECT			A.author,
 													STD(X.count_id) AS DESVIO_PADRAO
 										FROM 		(
 														SELECT 		author, COUNT(DISTINCT id) AS count_id
-														FROM 		2015_politics
+														FROM 		".$_GET['link_id']."
 														WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
 														GROUP BY 	author
 													) X
@@ -29,7 +29,7 @@ $query_author = "		SELECT			A.author,
 
 						LEFT JOIN 	(
 										SELECT 		count(distinct author) AS QTD_AUTORES
-										FROM 		2015_politics
+										FROM 		".$_GET['link_id']."
 										WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
 									) C 
 
@@ -106,7 +106,7 @@ if ($lower_than_1 > 0) {
 
 
 
-// $query_author2 = "	SELECT author, count(distinct id) AS count_id FROM 2015_politics
+// $query_author2 = "	SELECT author, count(distinct id) AS count_id FROM ".$_GET['link_id']."
 // 						WHERE link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
 // 						GROUP BY author
 // 						ORDER BY count_id DESC";

@@ -4,7 +4,7 @@ $query_positive_score = "	SELECT 		A.id, SUBSTRING(A.body,2,500) AS body, A.scor
 							FROM 
 							            (
 											SELECT id, body, score_hidden
-											FROM reddit.2015_politics
+											FROM ".$_GET['link_id']."
 											WHERE link_id = 't3_".$_GET['link_id']."' AND LENGTH(score_hidden) < 5 AND score_hidden > 0
 										) A
 							LEFT JOIN            
@@ -13,7 +13,7 @@ $query_positive_score = "	SELECT 		A.id, SUBSTRING(A.body,2,500) AS body, A.scor
 															STD(X.score_hidden) AS DESVIO_PADRAO
 											FROM        (
 															SELECT id, score_hidden AS score_hidden
-															FROM reddit.2015_politics
+															FROM ".$_GET['link_id']."
 															WHERE link_id = 't3_".$_GET['link_id']."' AND LENGTH(score_hidden) < 5 AND score_hidden > 0
 														) X
 										) B

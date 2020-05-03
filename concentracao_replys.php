@@ -4,7 +4,7 @@ $query_media_parent_id = "			SELECT 		AVG(count_id) AS MEDIA,
 												STD(count_id) AS DESVIO_PADRAO
 									FROM 		(
 													SELECT 		parent_id, COUNT(DISTINCT id) AS count_id
-												    FROM 		2015_politics
+												    FROM 		".$_GET['link_id']."
 												    WHERE 		link_id = 't3_".$_GET['link_id']."'
 												        		AND parent_id <> 't3_".$_GET['link_id']."'
 												    GROUP BY 	parent_id
@@ -20,7 +20,7 @@ $query_parent_id = "	SELECT 		A.parent_id, A.count_id, SUBSTRING(B.body,2,500) A
 										SELECT 		parent_id, 
 													count(distinct id) as count_id,
 													SUBSTR(parent_id,4,30) AS id_pai
-										FROM 		2015_politics
+										FROM 		".$_GET['link_id']."
 										WHERE 		link_id = 't3_".$_GET['link_id']."' and parent_id <> 't3_".$_GET['link_id']."'
 										GROUP BY 	parent_id
 									) A
@@ -29,7 +29,7 @@ $query_parent_id = "	SELECT 		A.parent_id, A.count_id, SUBSTRING(B.body,2,500) A
 
 									(
 										SELECT		distinct id, body
-										FROM 		2015_politics
+										FROM 		".$_GET['link_id']."
 										WHERE 		link_id = 't3_".$_GET['link_id']."'
 									) B
 						            
@@ -37,7 +37,7 @@ $query_parent_id = "	SELECT 		A.parent_id, A.count_id, SUBSTRING(B.body,2,500) A
 
 						LEFT JOIN 	(
 										SELECT 		count(distinct id) AS QTD_POSTS
-										FROM 		2015_politics
+										FROM 		".$_GET['link_id']."
 										WHERE 		link_id = 't3_".$_GET['link_id']."'
 									) C 
 

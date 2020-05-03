@@ -4,12 +4,12 @@ $query = "	SELECT 		a.id, a.author, a.body, ABS(a.SCORE), a.SCORE, a.ups, a.down
 							FROM
 							(
 								SELECT 		id, author, body, ABS(SCORE), SCORE, ups, downs,score_hidden, controversiality
-								FROM 		2015_politics 
+								FROM 		".$_GET['link_id']." 
 								WHERE 		link_id = 't3_".$_GET['link_id']."'
 							) a
 							LEFT JOIN    
 							(	SELECT 	COUNT(DISTINCT author) AS QTD_AUTHOR
-								FROM 	2015_politics 
+								FROM 	".$_GET['link_id']." 
 								WHERE 	link_id = 't3_".$_GET['link_id']."'
 							) b
 							ON 1 = 1

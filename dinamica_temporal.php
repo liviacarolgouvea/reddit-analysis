@@ -1,7 +1,7 @@
 <?php
 $query_created_utc = "	SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%d/%b/%Y') AS data_criacao, 
 												count(id) AS count
-								FROM 			2015_politics
+								FROM 			".$_GET['link_id']."
 								WHERE 		link_id = 't3_".$_GET['link_id']."'
 								GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
 								ORDER BY 	created_utc";
@@ -16,7 +16,7 @@ $count_created_utc_array[] = (int)$row_created_utc['count'];
 }
 
 // $query_last_3_days =	"	SELECT 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969') AS data_criacao, count(id)
-// 								FROM 		2015_politics
+// 								FROM 		".$_GET['link_id']."
 // 								WHERE 	link_id = 't3_".$_GET['link_id']."'
 // 								AND 		nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969') BETWEEN DATE_ADD(date(now()), INTERVAL -3 DAY) AND date(now())
 // 								GROUP BY nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')";
