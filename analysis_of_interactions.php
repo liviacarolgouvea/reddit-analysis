@@ -1,6 +1,8 @@
-<div class="card-header border-0 text-white py-3" style="background: #ffd635">
-    <span class="font-weight-bold medium"><i class="far fa-books"></i>Analysis of interactions</span>
-    <div class="small mb-2">Identifies whether more than 25% of the discussion is centered on any comments</div>
+<div class="card-header border-0 text-white py-3" style="background: #ff4500">
+    <!-- <span class="font-weight-bold medium">Analysis of interactions</span> -->
+    <span class="font-weight-bold medium">Análise da interação</span>
+    <!-- <div class="small mb-2">Identifies whether more than 25% of the discussion is centered on any comments</div> -->
+    <div class="small mb-2">Identifica se mais de 25% da discussão está centrada algum comentário de primeiro nível</div>
 </div>
 <?php
 
@@ -42,7 +44,7 @@ if ($_GET['link_id']) {
         $carry += $item['total'];
         return $carry;
     });
-    $limit = 0.15 * $total;
+    $limit = 0.25 * $total;
     foreach($x as $id => $item) {
         if ($item['total'] >= $limit) {
             $ultrapassou[$id] = $item['body'];
@@ -54,33 +56,6 @@ if ($_GET['link_id']) {
 <div class="list-group list-group-flush">
   <div class="list-group-item list-group-item-action py-3">      
       <?php
-      // for ($i=0; $i <= 6 ; $i++) {       
-      //   $intent = $i * 3;
-      //   $query_parents = "
-      //   SELECT id, author
-      //   FROM ".$_GET['link_id']."
-      //   WHERE link_id = 't3_".$_GET['link_id']."' AND depth = ".$i;
-      //   $result_parents = mysqli_query($con,$query_parents);				
-      //   $row_parents_array = mysqli_fetch_array($result_parents);        
-      //   $num_rows = mysqli_num_rows($result_parents);
-      //   if($num_rows > 0){
-      //     while($row_parents = mysqli_fetch_assoc($result_parents)) {           
-      //       echo "<p>". $row_parents['author']."<p>";                   
-      //       $query_childs = "
-      //       SELECT id, author, body, parent_id
-      //       FROM ".$_GET['link_id']."
-      //       WHERE link_id = 't3_".$_GET['link_id']."' AND parent_id = 't1_".$row_parents['id']."' AND depth = ".$i;
-      //       $result_childs = mysqli_query($con,$query_childs);				
-      //       $num_rows = mysqli_num_rows($result_childs);
-      //       if($num_rows > 0){
-      //         while($row_childs = mysqli_fetch_assoc($result_childs)) {
-      //           echo "<p style='text-indent: ".$intent."px '>".$row_childs['author']."<br>";                
-      //         }              
-      //       }
-      //     } 
-      //   }
-      // }
-
       if (!empty($ultrapassou)) { 
         foreach($ultrapassou as $id => $body) { ?>      
           <i class="fa fa-comment" aria-hidden="true" data-toggle="modal" data-target="#<?php echo $id; ?>" style="color:#ff4500; cursor: pointer;"></i>
