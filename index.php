@@ -153,22 +153,31 @@ WHERE subreddit = 'politics'  -->
 			</tr>
 		</table> -->
 
-		<table style="max-width: 1024px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto; height: 200px">
-			<tr >
-				<td style="width: 20%">
-					<?php include_once "age_dynamics.php";?>
+		<table style="width:90%; position: relative; min-width: 200px; margin: 5px auto; background: white; border:1px solid #cccccc">
+			<tr>				
+				<td style="width:45%; padding: 10px;">
+					<div>
+						<?php include_once "age_dynamics.php";?>
+						<br>
+						<?php include_once "monopolistic_behavior.php";?>												
+						<br>
+						<?php include_once "mayfly_buzz_behavior.php";?>
+						<br>
+						<?php include_once "analysis_of_interactions.php";?>
+						<br>
+						<?php include_once "signatures_of_controversies.php";?>
+					</div>														
 				</td> 
-				<td style="width: 20%">
-					<?php include_once "monopolistic_behavior.php";?>
-				</td>
-				<td style="width: 20%">
-					<?php include_once "signatures_of_controversies.php";?>
-				</td>
-				<td style="width: 20%">
-					<?php include_once "mayfly_buzz_behavior.php";?>
-				</td>
-				<td style="width: 20%">
-				<?php include_once "analysis_of_interactions.php";?>					
+				<td style="width: 50%; ">
+					<div>
+						<blockquote class="reddit-card" data-card-created="1556072778" >
+							<a href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/"></a>
+						</blockquote>
+						<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>	
+					</div>
+					<div style="max-width: 600px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto;">
+						<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/" target="_blank">Go to discussion</a>					
+					</div>									
 				</td>
 			</tr>
 		</table>		
@@ -182,21 +191,6 @@ WHERE subreddit = 'politics'  -->
 			</li>  
 		-->
 						
-		<div>
-			<blockquote class="reddit-card" data-card-created="1556072778" >
-				<a href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/"></a>
-			</blockquote>
-			<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>	
-		</div>
-		<div style="max-width: 600px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto;">
-			<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/" target="_blank">Go to discussion</a>					
-		</div>		
-
-		<?php 
-		// mysqli_close($con); 
-		?>
-
-
 	  <!-- SCRIPTS -->
 	  <!-- JQuery -->
 	  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

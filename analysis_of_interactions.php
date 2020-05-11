@@ -1,9 +1,9 @@
-<div class="card-header border-0 text-white py-3" style="background: #ff4500">
+<div class="card-header border-0 text-white py-3" style="background: #28b779">
     <!-- <span class="font-weight-bold medium">Analysis of interactions</span> -->
     <span class="font-weight-bold medium">Análise da interação</span>
     <!-- <div class="small mb-2">Identifies whether more than 25% of the discussion is centered on any comments</div> -->
     <div class="small mb-2">Identifica se mais de 25% da discussão está centrada algum comentário de primeiro nível</div>
-</div>
+<!-- </div> -->
 <?php
 
 function buildTree(array &$elements, string $parentId): array
@@ -53,8 +53,8 @@ if ($_GET['link_id']) {
 }
 
 ?>
-<div class="list-group list-group-flush">
-  <div class="list-group-item list-group-item-action py-3">      
+<!-- <div class="list-group list-group-flush">
+  <div class="list-group-item list-group-item-action py-3">       -->
       <?php
       if (!empty($ultrapassou)) { 
         foreach($ultrapassou as $id => $body) { ?>      
@@ -70,7 +70,7 @@ if ($_GET['link_id']) {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body"> 
+                  <div class="modal-body" style="color: black"> 
                     <?php echo $body; ?>
                   </div>
                 </div>
@@ -87,5 +87,5 @@ if ($_GET['link_id']) {
     //     echo "No comments had a concentration of more than 25% of responses";
     //   }
       ?>            
-  </div>
+  <!-- </div> -->
 </div>
