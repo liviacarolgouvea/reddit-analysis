@@ -1,13 +1,12 @@
-
-<div class="card-header border-0 text-white py-3" style="background: #da542e">
+<div class="card-header">
     <!-- <span class="font-weight-bold medium">Age dynamics</span> -->
     <span class="font-weight-bold medium">Dinâmica temporal</span>
     <div class="small mb-2">Identifica o volume de comentários ao longo da vida da discussão</div>
 <!-- </div> -->
     <?php
     $query = " SELECT CASE 
-                WHEN data_criacao = DATA_INICIAL THEN 'Bloomer inicial'
-                WHEN data_criacao = DATA_FINAL THEN 'Bloomer final'
+                WHEN data_criacao = DATA_INICIAL THEN 'Esta discussão teve mais postagens no início'
+                WHEN data_criacao = DATA_FINAL THEN 'Esta discussão teve mais postagens no início'
             ELSE 
                 'MEIO'
             END LOCALIZACAO,
@@ -34,7 +33,7 @@
             ORDER BY PORCENTAGEM DESC LIMIT 1"; 
     foreach($con->query($query) as $row) {
         if ($row['PORCENTAGEM'] >= 0.75) {
-            $age = "Esta discussão é um " . $row['LOCALIZACAO'];
+            $age = $row['LOCALIZACAO'];
         }else{
             $age = "Esta discussão teve postagens constantes ao longo de sua duração.";
         }
@@ -43,6 +42,6 @@
 
     <!-- <div class="list-group list-group-flush"> -->
     <!-- <div class="list-group-item list-group-item-action py-3">-->
-        <?php echo $age; ?>
+        <div class="div-output"><?php echo $age; ?></div>        
 <!--     </div> -->
 </div>

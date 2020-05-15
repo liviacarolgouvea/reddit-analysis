@@ -157,15 +157,15 @@ WHERE subreddit = 'politics'  -->
 			<tr>				
 				<td style="width:45%; padding: 10px;">
 					<div>
-						<?php include_once "age_dynamics.php";?>
+					<?php include_once "analysis_of_interactions.php";?>
 						<br>
-						<?php include_once "monopolistic_behavior.php";?>												
+							<?php include_once "monopolistic_behavior.php";?>												
 						<br>
-						<?php include_once "mayfly_buzz_behavior.php";?>
+							<?php include_once "signatures_of_controversies.php";?>
 						<br>
-						<?php include_once "analysis_of_interactions.php";?>
+							<?php include_once "age_dynamics.php";?>
 						<br>
-						<?php include_once "signatures_of_controversies.php";?>
+							<?php include_once "mayfly_buzz_behavior.php";?>
 					</div>														
 				</td> 
 				<td style="width: 50%; ">
