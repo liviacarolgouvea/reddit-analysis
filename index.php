@@ -168,7 +168,8 @@ WHERE subreddit = 'politics'  -->
 							<?php include_once "mayfly_buzz_behavior.php";?>
 					</div>														
 				</td> 
-				<td style="width: 50%; ">
+				<td style="width:45%; padding: 10px;">
+					<div><?php include_once "summarization.php";?></div>
 					<div>
 						<blockquote class="reddit-card" data-card-created="1556072778" >
 							<a href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/"></a>

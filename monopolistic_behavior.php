@@ -13,20 +13,18 @@
                     
                       (
                         SELECT id, body, author, ABS(SCORE) AS SCORE 
-                        FROM reddit.`2sgy4n`		
+                        FROM ".$_GET['link_id']."
                       )X
                       LEFT JOIN
                       (
                         SELECT (COUNT(id) * 0.2) AS VINTE_PORCENTO_COMENT
-                        FROM reddit.`2sgy4n`
-                        #1.127,4
+                        FROM ".$_GET['link_id']."
                       )A
                       ON 1=1
                       LEFT JOIN 
                       (
                         SELECT (SUM(abs(score)) * 0.25) AS UM_QUARTO_VOTOS
-                        FROM reddit.`2sgy4n`
-                        #11.464,75
+                        FROM ".$_GET['link_id']."
                       )B
                       ON 1=1
                     

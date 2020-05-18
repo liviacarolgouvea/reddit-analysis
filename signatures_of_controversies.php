@@ -12,7 +12,7 @@
                         FROM
                         (
                             SELECT 	COUNT(id) AS DELETED 
-                            FROM 	reddit.2sgy4n
+                            FROM 	".$_GET['link_id']."
                             WHERE 	author = '[deleted]'
                         )A
                             
@@ -20,7 +20,7 @@
                             
                         (	
                             SELECT 	COUNT(id) AS TOTAL_COMMENTS 
-                            FROM 	reddit.2sgy4n
+                            FROM 	".$_GET['link_id']."
                         )B	
 
                         ON 1 = 1";
