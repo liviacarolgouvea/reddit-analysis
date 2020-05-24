@@ -1,5 +1,6 @@
 <?php
 header('X-Frame-Options: ALLOW');
+header('X-Frame-Options: GOFORIT');
 ?>
 <!-- CHAMAR PÁGINA: http://localhost/codigo/index.php?link_id=32czwg -->
 <!-- RESTAURAR BANCO: mysql -u root -h localhost --protocol=tcp -p < reddit.sql -->
@@ -35,7 +36,7 @@ WHERE subreddit = 'politics'  -->
   	<body style="font-size: 15px; background: #e6e6e6;">
 		<?php
 		
-		// header('X-Frame-Options: GOFORIT');
+		
 
 		// ini_set('display_errors', 1);
 		// ini_set('display_startup_errors', 1);
@@ -73,91 +74,12 @@ WHERE subreddit = 'politics'  -->
 		$stmt->execute();
 		$row_caracteristica_conversa = $stmt->fetchAll();
 		?>
-<!-- 	 
-		<table class="table" style="max-width: 600px; position: relative; min-width: 200px; margin: 5px auto;">
-	 
-		<thead>
-		    <tr>
-		      <th scope="col"colspan="5" style="text-align: center;">DEBATE DESCRIPTION</th>
-		    </tr>
-		 </thead>		
-
-		  <tbody>
-		    
-			<tr>
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo $row_caracteristica_conversa['TOTAL_AUTORES']; ?></b></font>
-		      	<br> 		      	
-		      	<font size="2">Participants</font> 
-		      </td>
-		      
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo $row_caracteristica_conversa['TOTAL_POSTS']; ?></b></font>
-		      	<br>
-		      	<font size="2">Posts</font> 		      	
-		      </td>		      
-
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo round($row_caracteristica_conversa['TOTAL_POSTS']/$row_caracteristica_conversa['TOTAL_AUTORES']); ?></b></font>
-		      	<br>
-		      	<font size="2">Average of posts per participant</font> 		      	
-		      </td>
-
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo $row_caracteristica_conversa['TAMANHO_MEDIO_POSTS']; ?></b></font>
-		      	<br> 
-		      	<font size="2">Average posts size (characters)</font> 		      	
-		      </td>
-		    </tr> 
-		-->
-		    <!-- <tr>
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo $row_caracteristica_conversa['INICIO']; ?></b></font>
-		      	<br>
-		      	<font size="2">Start</font>  	
-		      </td>
-		      
-		      <td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo $row_caracteristica_conversa['FIM']; ?></b></font>
-		      	<br>
-		      	<font size="2">End</font> 		      	
-		      </td> 		      		      
-			<td scope="row" style="text-align: center;">
-		      	<font size="4"><b><?php // echo  round($row_caracteristica_conversa['TOTAL_POSTS']/$row_caracteristica_conversa['DURACAO']); ?> </b></font>
-		      	<br>
-		      	<font size="2">Average of posts per day</font> 		      	
-		     </td> 
-		      <td><?php  // include_once "dinamica_temporal.php"; ?> </td>
-		    </tr>		 
-		    
-		  </tbody>
-		</table>
-		-->
-		<!-- <table style="max-width: 600px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto; height: 200px">
-			<tr >
-				<td style="width: 33%">
-					<div style="background: #E6E6E6; margin: 5px;border-radius: 5px; padding: 10px">
-						<?php // include_once "dominancia_falantes.php";?>
-					</div>
-				</td>
-				<td style="width: 33%">
-					<div style="background: #A9D0F5; margin: 5px;border-radius: 5px; padding: 10px">
-						<?php // include_once "concentracao_replys.php";?>
-					</div>					
-				</td>
-				<td style="width: 33%">
-					<div style="background: #E6E6E6; margin: 5px;border-radius: 5px; padding: 10px">
-						<?php // include_once "concentracao_votos2.php";?>
-					</div>					
-				</td>
-			</tr>
-		</table> -->
 
 		<table style="width:90%; position: relative; min-width: 200px; margin: 5px auto; background: white; border:1px solid #cccccc">
 			<tr>				
 				<td style="width:45%; padding: 10px;">
 					<div>
-					<?php include_once "analysis_of_interactions.php";?>
+						<?php include_once "analysis_of_interactions.php";?>
 						<br>
 							<?php include_once "monopolistic_behavior.php";?>												
 						<br>
@@ -168,29 +90,21 @@ WHERE subreddit = 'politics'  -->
 							<?php include_once "mayfly_buzz_behavior.php";?>
 					</div>														
 				</td> 
-				<td style="width:45%; padding: 10px;">
-					<div><?php include_once "summarization.php";?></div>
+				<td style="width:45%; padding: 10px;vertical-align: top">					
+					<?php include_once "summarization.php";?>
+					<br>
 					<div>
 						<blockquote class="reddit-card" data-card-created="1556072778" >
-							<a href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/"></a>
+							<a href="https://www.reddit.com/r/brasil/comments/<?php echo $_GET['link_id']?>/"></a>
 						</blockquote>
-						<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>	
+						<script async src="https://embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>	
 					</div>
 					<div style="max-width: 600px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto;">
-						<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/coronabr/comments/<?php echo $_GET['link_id']?>/" target="_blank">Go to discussion</a>					
+						<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/brasil/comments/<?php echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>					
 					</div>									
 				</td>
 			</tr>
-		</table>		
-		
-			 			
-		<!-- 			
-			<li>
-				<div style="background: #A9D0F5; border-radius: 5px; padding: 10px">
-					<?php //include_once "concentracao_votos.php"; ?>
-				</div>				
-			</li>  
-		-->
+		</table>
 						
 	  <!-- SCRIPTS -->
 	  <!-- JQuery -->
@@ -202,71 +116,6 @@ WHERE subreddit = 'politics'  -->
 	  <!-- MDB core JavaScript -->
 	  <script type="text/javascript" src="js/mdb.min.js"></script>
 
-		<script>
-			//var array_data = <?php //echo json_encode($author_array_chart) ?>;	
-
-			var array_data_created_utc = <?php // echo json_encode($created_utc_array) ?>;	
-			var array_data_created_utc_count = <?php // echo json_encode($count_created_utc_array) ?>;	
-			
-			 // var array_aux = new Array();
-			//  var array_aux = [];
-			//  var array_aux2 = [];
-			
-			// for (var data in array_data) {
-			//   // array_aux += '{label:"'+data+'", data:[{x:'+array_data[data]+',y:'+array_data[data]+',r:'+array_data[data]+'}]}'; 
-			//   array_aux['label'] = array_data[data];
-			//   array_aux2[array_aux] = array_data[data];
-			  
-			// };
-			// aux_datasets = [{label: 'Sempais_nutrients',data: [{x: 116, y: 116, r: 116}]}, {label: 'Basic_Becky',data: [{x: 40, y: 40, r: 40}]}];
-			// console.log(array_data_created_utc_count);
-			// console.log(aux_datasets);
-
-		  // 	var ctxBc = document.getElementById('bubbleChart').getContext('2d');
-		  // 	var bubbleChart = new Chart(ctxBc, {
-		  //   	type: 'bubble',
-		  //   	data: {
-		  //     datasets: array_data		
-		  //   },
-		  //  options: {
-		  //        legend: {
-		  //           display: false
-		  //        }
-		  //  }      
-		  // })
-
-
-
-		  //line
-		  var ctxL = document.getElementById("lineChart").getContext('2d');
-		  var myLineChart = new Chart(ctxL, {
-		   type: 'line',
-		   data: {
-		      labels: array_data_created_utc,
-		      datasets: [{
-		          data: array_data_created_utc_count,
-		          backgroundColor: [
-		            'rgba(105, 0, 132, .2)',
-		          ],
-		          borderColor: [
-		            'rgba(200, 99, 132, .7)',
-		          ],
-		          borderWidth: 2
-		        }
-		      ]
-		   },
-		   options: {
-		         legend: {
-		            display: false
-		         }
-		   }    
-		  });
-
-
-			$(document).ready(function(){
-			  $('[data-toggle="tooltip"]').tooltip(); 
-			});
-		</script>
   </body>
 </html>
 

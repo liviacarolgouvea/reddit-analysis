@@ -9,7 +9,7 @@
   <div class="div-output">
     <?php if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 1){
       // echo "This discussion lasted one day.";
-      echo "A discussão durou apenas um dia";
+      echo 'A discussão teve um comportamento "explosivo" durando apenas um dia';
     }else{
       // echo "This discussion lasted more than a day.";
       echo "A discussão durou mais de um dia";

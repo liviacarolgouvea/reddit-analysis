@@ -34,7 +34,7 @@
     $somatorio = 0;
     foreach($con->query($query_score) as $row_score) {
       $somatorio += $row_score['SCORE'];          
-      $contador[$row_score['id']] = $row_score['body'];
+      $contador[$row_score['id']] = ["body" => $row_score['body'], "author" => $row_score['author']];
       if($somatorio > $row_score['UM_QUARTO_VOTOS'] && count($contador) < $row_score['VINTE_PORCENTO_COMENT'] ){ 
         $retorno = $contador;
       break;
@@ -42,24 +42,24 @@
     }?>
     <div class="div-output">
     <?php
-    foreach ($retorno as $id => $body) {?>      
-        <img src="img/score.png" style="width: 10px; cursor: pointer;" data-toggle="modal" data-target="#<?php echo $row_score['id']; ?>" />
+    foreach ($retorno as $id => $value) {?>      
+        <img src="img/score.png" style="width: 10px; cursor: pointer;" data-toggle="modal" data-target="#<?php echo $id; ?>" />
         <!-- <i class="fa fa-sort" aria-hidden="true" data-toggle="modal" data-target="#<?php // echo $row_score['id']; ?>" style="color:#ff4500; cursor: pointer;"></i> -->
         &nbsp;&nbsp;
       
         <!-- Modal -->
-        <div class="modal fade" id="<?php echo $row_score['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="<?php echo $id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document" style="max-width:100%">
             <div class="modal-content">
               <div class="modal-header">
-              <b>Autor:</b> <?php echo $row_score['author']; ?>
+              <b>Autor:</b> <?php echo $value['author']; ?>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body"> 
                 <b>Comentário:</b><br>
-                <?php echo substr($row_score['body'], 1, -1); ?>
+                <?php echo substr($value['body'], 1, -1); ?>
               </div>
             </div>
           </div>
