@@ -1,11 +1,10 @@
-<div class="card-header">
-    <!-- <span class="font-weight-bold medium"><i class="far fa-books"></i>Monopolistic behavior</span> -->
-    <span class="font-weight-bold medium">Comportamento monopolista</span>
-    <!-- <div class="small mb-2">At least a quarter of the votes focus on 20% of comments</div> -->
-    <div class="small mb-2">Identifica quais comentários cocentraram mais votos na discussão.</div>
-<!-- </div>		 -->
-<!-- <div class="list-group list-group-flush"> -->
-  <!-- <div class="list-group-item list-group-item-action py-3 overflow-auto" style="height: 100px"> -->
+<div class="card">
+  <div class="card-header">
+    Comportamento monopolista
+    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>    
+
+  </div>
+  <div class="card-body">
     <?php
     $query_score = "SELECT id, REPLACE(body,'b','') as body, author, SCORE, VINTE_PORCENTO_COMENT, UM_QUARTO_VOTOS
 
@@ -40,32 +39,42 @@
       break;
       }
     }?>
-    <div class="div-output">
+    <p class="card-title">Foi identificada a concentração de votos na seguinte resposta ao tópico.</p>
     <?php
     foreach ($retorno as $id => $value) {?>      
-        <img src="img/score.png" style="width: 10px; cursor: pointer;" data-toggle="modal" data-target="#<?php echo $id; ?>" />
-        <!-- <i class="fa fa-sort" aria-hidden="true" data-toggle="modal" data-target="#<?php // echo $row_score['id']; ?>" style="color:#ff4500; cursor: pointer;"></i> -->
-        &nbsp;&nbsp;
-      
-        <!-- Modal -->
-        <div class="modal fade" id="<?php echo $id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document" style="max-width:100%">
-            <div class="modal-content">
-              <div class="modal-header">
-              <b>Autor:</b> <?php echo $value['author']; ?>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body"> 
-                <b>Comentário:</b><br>
-                <?php echo substr($value['body'], 1, -1); ?>
-              </div>
+        
+        <div id="#monop_<?php echo $id; ?>" >              
+            <div id="#monop_brief_<?php echo $id; ?>" class="card-text">
+              <?php echo substr($value['body'],0,80).'... ';?>                         
+              <a  data-toggle="collapse" data-target="#monop_<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fa fa-plus-square-o" onclick="document.getElementById('#monop_brief_<?php echo $id; ?>').style.color = 'white'";></i>
+                <i class="fa fa-minus-square-o" onclick="document.getElementById('#monop_brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
+              </a>
             </div>
-          </div>
-        </div>		      
+            <div id="monop_<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#monop_<?php echo $id; ?>">
+              <?php echo $value['body']; ?>
+            </div>
+        </div>	        
     <?php
     }?>
+        
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalMonopolisticBehavior" tabindex="-1" role="dialog" aria-labelledby="modalMonopolisticBehaviorLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalMonopolisticBehaviorLabel">Comportamento monopolista</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        xxxxxxxx
+      </div>
     </div>
-<!--   </div> -->
+  </div>
 </div>

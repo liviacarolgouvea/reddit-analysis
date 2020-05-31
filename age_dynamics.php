@@ -1,8 +1,9 @@
-<div class="card-header">
-    <!-- <span class="font-weight-bold medium">Age dynamics</span> -->
-    <span class="font-weight-bold medium">Dinâmica temporal</span>
-    <div class="small mb-2">Identifica o volume de comentários ao longo da vida da discussão</div>
-<!-- </div> -->
+<div class="card">
+    <div class="card-header">
+        Dinâmica temporal
+        <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i>    
+    </div>
+    <div class="card-body">
     <?php
     $query = " SELECT CASE 
                 WHEN data_criacao = DATA_INICIAL THEN 'Esta discussão teve mais postagens no início'
@@ -39,9 +40,34 @@
         }
     }
     ?>
+    <p class="card-title"><?php echo $age; ?></p>
+  </div>
+</div>
 
-    <!-- <div class="list-group list-group-flush"> -->
-    <!-- <div class="list-group-item list-group-item-action py-3">-->
-        <div class="div-output"><?php echo $age; ?></div>        
-<!--     </div> -->
+<!-- Modal -->
+<div class="modal fade" id="modalAgeDynamics" tabindex="-1" role="dialog" aria-labelledby="modalAgeDynamicsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgeDynamicsLabel">Dinâmica temporal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Pode-se identificar três tipos de comportamento nas evolução das postagens na discussão:
+            <ul>
+                <li>
+                    Bloomers iniciais: identifica se os comentários (mais de 75%) se concentraram no primeiro dia da discussão.
+                </li>
+                <li>
+                    Postagens constantes: identifica se a discussão evoluiu de forma constante ao longo da vida útil.
+                </li>
+                <li>
+                    Bloomers finais: identifica se a discussão concentrou os comentários no final de sua vida.
+                </li>
+            </ul>
+      </div>
+    </div>
+  </div>
 </div>

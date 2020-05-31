@@ -1,11 +1,4 @@
-<div class="card-header">
-    <!-- <span class="font-weight-bold medium">Analysis of interactions</span> -->
-    <span class="font-weight-bold medium">Análise da interação</span>
-    <!-- <div class="small mb-2">Identifies whether more than 25% of the discussion is centered on any comments</div> -->
-    <div class="small mb-2">Identifica em quais comentários de primeiro nível a discussão está mais concentrada.</div>
-<!-- </div> -->
 <?php
-
 function buildTree(array &$elements, string $parentId): array
 {
     $branch = [];
@@ -30,8 +23,8 @@ function buildTree(array &$elements, string $parentId): array
 if ($_GET['link_id']) {
     $query = "
     SELECT id, author, REPLACE(body,'b','') as body,
-           REPLACE(parent_id, 't1_', '') parent_id,
-           1 AS total
+          REPLACE(parent_id, 't1_', '') parent_id,
+          1 AS total
     FROM ".$_GET['link_id'];
 
     $array = array();
@@ -51,37 +44,56 @@ if ($_GET['link_id']) {
         }
     }  
 }?>
-<!-- <div class="list-group list-group-flush">
-  <div class="list-group-item list-group-item-action py-3">       -->
-  <div class="div-output">
-      <?php
-      if (!empty($ultrapassou)) { 
-        foreach($ultrapassou as $id => $value) { ?>      
-          <i class="fa fa-comment" aria-hidden="true" data-toggle="modal" data-target="#<?php echo $id; ?>" style="color:#ff4500; cursor: pointer;"></i>
-          &nbsp;&nbsp;
-          
-            <!-- Modal -->
-            <div class="modal fade" id="<?php echo $id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="max-width:100%">
-                <div class="modal-content">
-                  <div class="modal-header">
-                  <b>Autor:</b> <?php echo $value['author']; ?>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body"> 
-                  <b>Comentário:</b><br>
-                    <?php echo substr($value['body'], 1, -1); ?>
-                  </div>
-                </div>
-              </div>
-            </div>		
-        <?php
-        }
-      }else{
-        echo "Nenum comentário de primeiro nível centralizou as respostas";
-      }?>
+
+<div class="card">
+  <div class="card-header">
+    Análise da interação
+    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
   </div>
-  <!-- </div> -->
+  <?php
+  if (!empty($ultrapassou)) { ?>
+
+    <div class="card-body">
+      <p class="card-title">Foi identificada a concentração de comentários na seguinte resposta ao tópico:</p>
+      <?php          
+      foreach($ultrapassou as $id => $value) { ?>      
+
+        <div id="#<?php echo $id; ?>" >              
+            <div id="#brief_<?php echo $id; ?>" class="card-text">
+              <?php echo substr($value['body'],0,80).'... ';?>                         
+              <a  data-toggle="collapse" data-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'white'";></i>
+                <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
+              </a>
+            </div>
+            <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
+              <?php echo substr($value['body'], 1, -1); ?>
+            </div>
+        </div>	
+      <?php
+      }
+  }else{?>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+  <?php }?>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalAnalysisInteraction" tabindex="-1" role="dialog" aria-labelledby="modalAnalysisInteractionLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Análise da interação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Verifica se pelo menos 25% da discussão está centrada em um algum comentário de primeiro nível
+      </div>
+    </div>
+  </div>
 </div>
