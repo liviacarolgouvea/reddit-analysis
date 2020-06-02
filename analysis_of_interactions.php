@@ -46,36 +46,32 @@ if ($_GET['link_id']) {
 }?>
 
 <div class="card">
-  <div class="card-header">
-    Análise da interação
+  <div class="card-header">  
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
-  </div>
-  <?php
-  if (!empty($ultrapassou)) { ?>
+    <b>Análise da interação</b>
+    <?php
+    if (!empty($ultrapassou)) { ?>
+      <h4 class="card-title">Alguns comentários concentraram mais repostas:</h4>
+        <?php
+        foreach($ultrapassou as $id => $value) { ?>      
 
-    <div class="card-body">
-      <p class="card-title">Foi identificada a concentração de comentários na seguinte resposta ao tópico:</p>
-      <?php          
-      foreach($ultrapassou as $id => $value) { ?>      
-
-        <div id="#<?php echo $id; ?>" >              
-            <div id="#brief_<?php echo $id; ?>" class="card-text">
-              <?php echo substr($value['body'],0,80).'... ';?>                         
-              <a  data-toggle="collapse" data-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'white'";></i>
-                <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
-              </a>
-            </div>
-            <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
-              <?php echo substr($value['body'], 1, -1); ?>
-            </div>
-        </div>	
-      <?php
-      }
-  }else{?>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-  <?php }?>
+          <div id="#<?php echo $id; ?>" >              
+              <div id="#brief_<?php echo $id; ?>" class="card-text">
+                <?php echo substr($value['body'],0,80).'... ';?>                         
+                <a  data-toggle="collapse" data-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
+                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'white'";></i>
+                  <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
+                </a>
+              </div>
+              <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
+                <?php echo substr($value['body'], 1, -1); ?>
+              </div>
+          </div>	
+        <?php
+        }
+      }else{
+        echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
+      }?>
   </div>
 </div>
 
@@ -92,7 +88,7 @@ if ($_GET['link_id']) {
         </button>
       </div>
       <div class="modal-body">
-        Verifica se pelo menos 25% da discussão está centrada em um algum comentário de primeiro nível
+        Identifica quando pelo menos 25% da discussão está centrada em um algum comentário de primeiro nível.
       </div>
     </div>
   </div>

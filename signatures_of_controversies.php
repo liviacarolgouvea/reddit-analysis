@@ -1,32 +1,34 @@
 <div class="card">
   <div class="card-header">
-    <span class="font-weight-bold medium">Medida de controvérsia</span>
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalSignaturesOfControversies"></i>    
-  </div>
-  <div class="card-body">  
-    <?php
-    $sql_controversy = "SELECT TOTAL_COMMENTS, DELETED, (DELETED / TOTAL_COMMENTS) * 100 AS PORCENTAGEM
-                        
-                        FROM
-                        (
-                            SELECT 	COUNT(id) AS DELETED 
-                            FROM 	".$_GET['link_id']."
-                            WHERE 	author = '[deleted]'
-                        )A
-                            
-                            LEFT JOIN
-                            
-                        (	
-                            SELECT 	COUNT(id) AS TOTAL_COMMENTS 
-                            FROM 	".$_GET['link_id']."
-                        )B	
+    <b>Medida de controvérsia:</b>
+      <?php
+      $sql_controversy = "SELECT TOTAL_COMMENTS, DELETED, (DELETED / TOTAL_COMMENTS) * 100 AS PORCENTAGEM
+                          
+                          FROM
+                          (
+                              SELECT 	COUNT(id) AS DELETED 
+                              FROM 	".$_GET['link_id']."
+                              WHERE 	author = '[deleted]'
+                          )A
+                              
+                              LEFT JOIN
+                              
+                          (	
+                              SELECT 	COUNT(id) AS TOTAL_COMMENTS 
+                              FROM 	".$_GET['link_id']."
+                          )B	
 
-                        ON 1 = 1";
+                          ON 1 = 1";
 
-    $result=$con->prepare($sql_controversy);
-    $result->execute();
-    $row_controversy = $result->fetchAll(\PDO::FETCH_ASSOC);?>
-    <p class="card-title">O grau de controvérsia desta discussão é de <?php echo round($row_controversy[0]['PORCENTAGEM'],1)."%";?></p>
+      $result=$con->prepare($sql_controversy);
+      $result->execute();
+      $row_controversy = $result->fetchAll(\PDO::FETCH_ASSOC);
+      if(round($row_controversy[0]['PORCENTAGEM'],1) == 0){
+        echo "<h4 class='card-title'>Não foi detectada controvérsia nesta discussão</h4>";
+      }else{        
+        echo "<h4 class='card-title'>O grau de controvérsia desta discussão é de ". round($row_controversy[0]['PORCENTAGEM'],1)."%</h4>";
+      }?>
   </div>
 </div>
 

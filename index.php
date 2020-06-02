@@ -16,8 +16,8 @@ WHERE subreddit = 'politics'  -->
   	<head>
    	<!-- Required meta tags -->
    	
-   	<meta charset="utf-8">
-   	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   		<meta charset="utf-8">
+   		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<!-- Bootstrap CSS -->
    		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -28,12 +28,19 @@ WHERE subreddit = 'politics'  -->
 	  	<!-- Material Design Bootstrap -->
 	  	<link href="css/mdb.min.css" rel="stylesheet">
 	  	<!-- Your custom styles (optional) -->
-	  	<link href="css/style.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		  
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
     	<title>Dissertação</title>
 
 
   	</head>
-  	<body style="font-size: 15px; background: #e6e6e6;">
+	  <body style="font-size: 15px; background: #e6e6e6;">
+
+
 		<?php
 		
 		
@@ -79,15 +86,17 @@ WHERE subreddit = 'politics'  -->
 			<tr>				
 				<td style="width:45%; padding: 10px;">
 					<div>
-						<?php include_once "analysis_of_interactions.php";?>
-						<br>
-							<?php include_once "monopolistic_behavior.php";?>												
+						<?php include_once "analysis_of_interactions.php";?>															
 						<br>
 							<?php include_once "signatures_of_controversies.php";?>
 						<br>
 							<?php include_once "age_dynamics.php";?>
+						
+							<?php //include_once "mayfly_buzz_behavior.php";?>
 						<br>
-							<?php include_once "mayfly_buzz_behavior.php";?>
+							<?php include_once "monopolistic_behavior.php";?>
+						<br>
+							<?php include_once "concentracao_votos.php";?>
 					</div>														
 				</td> 
 				<td style="width:45%; padding: 10px;vertical-align: top">					
@@ -95,12 +104,12 @@ WHERE subreddit = 'politics'  -->
 					<br>
 					<div>
 						<blockquote class="reddit-card" data-card-created="1556072778" >
-							<a href="https://www.reddit.com/r/brasil/comments/<?php echo $_GET['link_id']?>/"></a>
+							<a href="https://www.reddit.com/r/Coronavirus/comments/<?php echo $_GET['link_id']?>/"></a>
 						</blockquote>
 						<script async src="https://embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>	
 					</div>
 					<div style="max-width: 600px; padding: 10px; position: relative; min-width: 200px; margin: 5px auto;">
-						<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/brasil/comments/<?php echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>					
+						<a class="btn btn-primary btn-lg btn-block"  href="https://www.reddit.com/r/Coronavirus/comments/<?php echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>					
 					</div>									
 				</td>
 			</tr>
@@ -115,8 +124,8 @@ WHERE subreddit = 'politics'  -->
 	  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 	  <!-- MDB core JavaScript -->
 	  <script type="text/javascript" src="js/mdb.min.js"></script>
-
-	  <script src="https://use.fontawesome.com/eba96d6937.js"></script>
+	  
+	  <script src="https://use.fontawesome.com/eba96d6937.js"></script>	  
   </body>
 </html>
 

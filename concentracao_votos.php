@@ -1,57 +1,71 @@
-Os posts mais votos positivos foram:				
 <?php
-$query_positive_score = "	SELECT 		A.id, SUBSTRING(A.body,2,500) AS body, A.score_hidden, B.MEDIA, B.DESVIO_PADRAO
-							FROM 
-							            (
-											SELECT id, body, score_hidden
-											FROM ".$_GET['link_id']."
-											WHERE link_id = 't3_".$_GET['link_id']."' AND LENGTH(score_hidden) < 5 AND score_hidden > 0
-										) A
-							LEFT JOIN            
-										(
-											SELECT 		AVG(X.score_hidden) AS MEDIA,
-															STD(X.score_hidden) AS DESVIO_PADRAO
-											FROM        (
-															SELECT id, score_hidden AS score_hidden
-															FROM ".$_GET['link_id']."
-															WHERE link_id = 't3_".$_GET['link_id']."' AND LENGTH(score_hidden) < 5 AND score_hidden > 0
-														) X
-										) B
-							                                    
-							ON 			1 = 1";
-//echo "<pre>".$query_positive_score."</pre>";							
-$i = 1;
+$query = "	SELECT 		A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
+			FROM 
+						(
+							SELECT id, body, ABS(score) as SCORE
+							FROM ".$_GET['link_id']."
+						) A
+			LEFT JOIN            
+						(
+							SELECT 		AVG(ABS(score)) AS MEDIA,
+										STD(ABS(score)) AS DESVIO_PADRAO							
+							FROM 		".$_GET['link_id']."																				
+						) B
+												
+			ON 			1 = 1";
+//echo "<pre>".$query."</pre>";							
 
-$result_positive_score = mysqli_query($con,$query_positive_score);				
-while($row_positive_score = mysqli_fetch_assoc($result_positive_score)) {
-	$score_percentage = $row_positive_score['score_hidden'] / $row_positive_score['DESVIO_PADRAO'];
-	if($score_percentage > 10){ ?>
- 		<!-- Button trigger modal -->
-<!--  		<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#<?php echo $row_positive_score['id']; ?>" style="padding: 5px">
- 			<span class="fas fa-quote-right" data-toggle="tooltip" title="Post <?php echo $i ?>" style="font-size: 14px"></span>
- 		</button>		 -->
-
- 		<i class="fa fa-sort" aria-hidden="true" data-toggle="modal" data-target="#<?php echo $row_positive_score['id']; ?>" style="color:#ff4500; cursor: pointer;"></i>
-	&nbsp;&nbsp;
-	
- 		<!-- Modal -->
- 		<div class="modal fade" id="<?php echo $row_positive_score['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 		  	<div class="modal-dialog" role="document" style="max-width:100%">
- 		    <div class="modal-content" style="width: 80%; margin: 0 auto">
- 		      <div class="modal-header">
- 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
- 		          <span aria-hidden="true">&times;</span>
- 		        </button>
- 		      </div>
- 		      <div class="modal-body">
- 		        <?php echo $row_positive_score['body']; ?>
- 		      </div>
- 		    </div>
- 		  </div>
- 		</div>		
-	<?php	
-	$i++;
+foreach($con->query($query) as $row) {
+	if($row['PERCENT'] > 10){ 
+		$concentracao_votos[$id] = $row['body'];
+ 		
 	}
 }	
 ?>
 
+<div class="card">
+  <div class="card-header">  
+    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
+    <b>Concentração de votos</b>
+    <?php
+    if (!empty($concentracao_votos)) { ?>
+      <h4 class="card-title">Alguns comentários concentraram mais votos:</h4>
+        <?php
+        foreach($concentracao_votos as $id => $value) { ?>      
+
+          <div id="#concentracao_votos<?php echo $id; ?>" >              
+              <div id="#brief_concentracao_votos<?php echo $id; ?>" class="card-text">
+                <?php echo substr($value,0,80).'... ';?>                         
+                <a  data-toggle="collapse" data-target="#concentracao_votos<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
+                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = 'white'";></i>
+                  <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = '#747373'";></i>                
+                </a>
+              </div>
+              <div id="concentracao_votos<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#concentracao_votos<?php echo $id; ?>">
+                <?php echo substr($value, 1, -1); ?>
+              </div>
+          </div>	
+        <?php
+        }
+      }else{
+        echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
+      }?>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalConcentracaoVotos" tabindex="-1" role="dialog" aria-labelledby="modalConcentracaoVotos" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalConcentracaoVotos">Concentração de votos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Identifica se algum comentário concentrou os votos da discussão. (Se está a 10 vezes a cima do desvio padrão de votos).
+      </div>
+    </div>
+  </div>
+</div>

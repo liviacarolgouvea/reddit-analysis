@@ -6,11 +6,14 @@
     
 }
 .card-header{
-    background: #DCDCDC;
+    background: #f5f5f0;
     border: solid 1px #D3D3D3;
     border-radius: 5px;
     color: #1C1C1C;
-    font-weight: bold;
+}
+
+.card-header b{
+    font-size: 12px;
 }
 
 .modal-content{
@@ -20,9 +23,17 @@
     font-weight: lighter;
 }
 
-.fa-plus-square-o, .fa-minus-square-o, .fa-question-circle-o{
+.fa-plus-square-o, .fa-minus-square-o{
     color:#ff4500; 
     cursor: pointer;
+}
+
+.fa-question-circle-o{
+    color:#ff4500; 
+    cursor: pointer;
+    margin-top: -5px;
+    margin-right: -5px;
+    float: right
 }
 
 a[aria-expanded=false] .fa-minus-square-o {
@@ -34,8 +45,29 @@ a[aria-expanded=true] .fa-plus-square-o {
 
 .collapse{
     color: #747373;
+    font-size: 12px;
+}
+
+.collapsing{
+    color: #747373;
+    font-size: 12px;
 }
 
 .modal-body{
     color: black !important;
+    font-size: 18px;
 }
+
+.card-text{
+    color: #747373 !important;
+    font-size: 12px;
+}
+
+.modal-dialog{
+    max-width: 800px;
+}
+
+.card-title{
+    font-size: 18px;
+}
+

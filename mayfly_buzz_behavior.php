@@ -1,18 +1,14 @@
 <div class="card">
   <div class="card-header">
-    Comportamento Mayfly Buzz
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMayflyBuzz"></i>
-  </div>
-  <div class="card-body">
-    <p class="card-title">
-      <?php if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 1){
+      <b> Mayfly Buzz:</b>
+      <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMayflyBuzz"></i>
+      <?php if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 0){
         // echo "This discussion lasted one day.";
-        echo 'A discussão teve um comportamento "explosivo" durando apenas um dia';
+        echo "<h4 class='card-title'> A discussão teve um comportamento explosivo durando apenas um dia</h4>";
       }else{
         // echo "This discussion lasted more than a day.";
-        echo "A discussão durou mais de um dia";
+        echo "<h4 class='card-title'>A discussão não teve comportamento explosivo.</h4>";
       }?>  
-    </p>
   </div>
 </div>
 
