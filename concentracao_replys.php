@@ -4,9 +4,9 @@ $query_media_parent_id = "			SELECT 		AVG(count_id) AS MEDIA,
 												STD(count_id) AS DESVIO_PADRAO
 									FROM 		(
 													SELECT 		parent_id, COUNT(DISTINCT id) AS count_id
-												    FROM 		".$_GET['link_id']."
-												    WHERE 		link_id = 't3_".$_GET['link_id']."'
-												        		AND parent_id <> 't3_".$_GET['link_id']."'
+												    FROM 		".$_POST['link_id']."
+												    WHERE 		link_id = 't3_".$_POST['link_id']."'
+												        		AND parent_id <> 't3_".$_POST['link_id']."'
 												    GROUP BY 	parent_id
 												) a";
 $result_media_parent_id = mysqli_query($con,$query_media_parent_id);
@@ -20,8 +20,8 @@ $query_parent_id = "	SELECT 		A.parent_id, A.count_id, SUBSTRING(B.body,2,500) A
 										SELECT 		parent_id, 
 													count(distinct id) as count_id,
 													SUBSTR(parent_id,4,30) AS id_pai
-										FROM 		".$_GET['link_id']."
-										WHERE 		link_id = 't3_".$_GET['link_id']."' and parent_id <> 't3_".$_GET['link_id']."'
+										FROM 		".$_POST['link_id']."
+										WHERE 		link_id = 't3_".$_POST['link_id']."' and parent_id <> 't3_".$_POST['link_id']."'
 										GROUP BY 	parent_id
 									) A
 
@@ -29,16 +29,16 @@ $query_parent_id = "	SELECT 		A.parent_id, A.count_id, SUBSTRING(B.body,2,500) A
 
 									(
 										SELECT		distinct id, body
-										FROM 		".$_GET['link_id']."
-										WHERE 		link_id = 't3_".$_GET['link_id']."'
+										FROM 		".$_POST['link_id']."
+										WHERE 		link_id = 't3_".$_POST['link_id']."'
 									) B
 						            
 						ON			A.id_pai = B.id
 
 						LEFT JOIN 	(
 										SELECT 		count(distinct id) AS QTD_POSTS
-										FROM 		".$_GET['link_id']."
-										WHERE 		link_id = 't3_".$_GET['link_id']."'
+										FROM 		".$_POST['link_id']."
+										WHERE 		link_id = 't3_".$_POST['link_id']."'
 									) C 
 
 						ON 			1 = 1						

@@ -20,19 +20,19 @@ function buildTree(array &$elements, string $parentId): array
     return $branch;
 }
 
-if ($_GET['link_id']) {
+if ($_POST['link_id']) {
     $query = "
     SELECT id, author, REPLACE(body,'b','') as body,
           REPLACE(parent_id, 't1_', '') parent_id,
           1 AS total
-    FROM ".$_GET['link_id'];
+    FROM ".$_POST['link_id'];
 
     $array = array();
     
     $stmt=$con->prepare($query);
     $stmt->execute();
     $array = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    $x = buildTree($array, 't3_'.$_GET['link_id']);
+    $x = buildTree($array, 't3_'.$_POST['link_id']);
     $total = array_reduce($x, function($carry, $item){
         $carry += $item['total'];
         return $carry;
@@ -50,8 +50,14 @@ if ($_GET['link_id']) {
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
     <b>Análise da interação</b>
     <?php
-    if (!empty($ultrapassou)) { ?>
-      <h4 class="card-title">Alguns comentários concentraram mais repostas:</h4>
+    $count = count($ultrapassou);
+    if (!empty($ultrapassou)) { 
+      if(count($ultrapassou) > 1){?>
+        <h4 class="card-title">Alguns comentários concentraram mais repostas:</h4>
+      <?php }else{ ?>
+        <h4 class="card-title">Um comentário concentrou mais repostas:</h4>
+      <?php }?>
+      
         <?php
         foreach($ultrapassou as $id => $value) { ?>      
 

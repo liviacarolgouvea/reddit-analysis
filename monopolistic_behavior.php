@@ -12,8 +12,8 @@
 
                 FROM 		(                        
                             SELECT 		author, count(distinct id) AS count_id 
-                            FROM 		".$_GET['link_id']."
-                            WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
+                            FROM 		".$_POST['link_id']."
+                            WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
                             GROUP BY 	author     
                             ORDER BY 	count_id desc
                         ) A
@@ -24,8 +24,8 @@
                                       STD(X.count_id) AS DESVIO_PADRAO
                             FROM 		(
                                       SELECT 		author, COUNT(DISTINCT id) AS count_id
-                                      FROM 		".$_GET['link_id']."
-                                      WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
+                                      FROM 		".$_POST['link_id']."
+                                      WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
                                       GROUP BY 	author
                                     ) X
                         ) B
@@ -35,21 +35,28 @@
                 LEFT JOIN 	
                         (
                             SELECT 		count(distinct author) AS QTD_AUTORES
-                            FROM 		  ".$_GET['link_id']."
-                            WHERE 		link_id = 't3_".$_GET['link_id']."' AND author <> '[deleted]'
+                            FROM 		  ".$_POST['link_id']."
+                            WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
                         ) C 
                 ON 			1 = 1";
       // echo "<pre>".$query_score."</pre>";							
 
       foreach($con->query($query) as $row) {
-        if ($row['PERCENTAGE'] > 10) {
+        if ($row['PERCENTAGE'] > 3) {
           $authors[] = $row['author'];
         }        
-      }?>
-      <h4 class="card-title">Alguns autores falaram mais que o restante:</h4>
-      <?php
-      foreach ($authors as $id => $value) {
-        echo "<div class='card-text'>".$value."</div>";
+      }
+      if (!empty($authors)) { 
+        if(count($authors) > 1){
+          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista em alguns autores que falaram mais que o restante:</h4>";
+        }else{
+          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista em um autor que falou mais que o restante:</h4>";
+        }
+        foreach ($authors as $id => $value) {
+          echo "<div class='card-text' style='margin-left:40%; padding:3px;'><img src='img/avatar_1.png' width='20px'> 
+                <a href='https://www.reddit.com/user/".$value."/' target='_blank'>".$value."</a>
+                </div>";
+        }
       }?>
   </div>
 </div>

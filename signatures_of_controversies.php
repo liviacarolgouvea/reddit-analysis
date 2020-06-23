@@ -8,15 +8,15 @@
                           FROM
                           (
                               SELECT 	COUNT(id) AS DELETED 
-                              FROM 	".$_GET['link_id']."
-                              WHERE 	author = '[deleted]'
+                              FROM 	  ".$_POST['link_id']."
+                              WHERE 	body = '[removed];' OR body LIKE 'Your comment has been removed%'
                           )A
                               
                               LEFT JOIN
                               
                           (	
                               SELECT 	COUNT(id) AS TOTAL_COMMENTS 
-                              FROM 	".$_GET['link_id']."
+                              FROM 	".$_POST['link_id']."
                           )B	
 
                           ON 1 = 1";

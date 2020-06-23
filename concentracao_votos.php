@@ -1,22 +1,22 @@
 <?php
-$query = "	SELECT 		A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
-			FROM 
-						(
-							SELECT id, body, ABS(score) as SCORE
-							FROM ".$_GET['link_id']."
-						) A
-			LEFT JOIN            
-						(
-							SELECT 		AVG(ABS(score)) AS MEDIA,
-										STD(ABS(score)) AS DESVIO_PADRAO							
-							FROM 		".$_GET['link_id']."																				
-						) B
-												
-			ON 			1 = 1";
+$query = "	SELECT 	  A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
+            FROM 
+                  (
+                      SELECT    id, body, ABS(score) as SCORE
+                      FROM      ".$_POST['link_id']."
+                  ) A
+            LEFT JOIN            
+                  (
+                      SELECT 		AVG(ABS(score)) AS MEDIA,
+                                STD(ABS(score)) AS DESVIO_PADRAO							
+                      FROM 		  ".$_POST['link_id']."																				
+                  ) B
+                              
+            ON 			1 = 1";
 //echo "<pre>".$query."</pre>";							
 
 foreach($con->query($query) as $row) {
-	if($row['PERCENT'] > 10){ 
+	if($row['PERCENT'] > 3){ 
 		$concentracao_votos[$id] = $row['body'];
  		
 	}
@@ -26,13 +26,18 @@ foreach($con->query($query) as $row) {
 <div class="card">
   <div class="card-header">  
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
-    <b>Concentração de votos</b>
+    <b>Destaque de votos</b>
     <?php
-    if (!empty($concentracao_votos)) { ?>
-      <h4 class="card-title">Alguns comentários concentraram mais votos:</h4>
-        <?php
-        foreach($concentracao_votos as $id => $value) { ?>      
-
+    if (!empty($concentracao_votos)) { 
+      if(count($concentracao_votos) > 1){
+        echo "<h4 class='card-title'>Alguns comentários se destacaram por obterem muito votos:</h4>";
+      }else{
+        echo "<h4 class='card-title'>Um comentário se destacou por obter muitos votos:</h4>";
+      }      
+      foreach($concentracao_votos as $id => $value) { 
+        if($value == "[removed];"){
+          echo "O comentário foi removido pelo moderador";
+        }else{ ?>      
           <div id="#concentracao_votos<?php echo $id; ?>" >              
               <div id="#brief_concentracao_votos<?php echo $id; ?>" class="card-text">
                 <?php echo substr($value,0,80).'... ';?>                         
@@ -47,9 +52,10 @@ foreach($con->query($query) as $row) {
           </div>	
         <?php
         }
-      }else{
-        echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
-      }?>
+      }
+    }else{
+      echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
+    }?>
   </div>
 </div>
 

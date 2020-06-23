@@ -4,66 +4,63 @@
         <b>Dinâmica temporal:</b>        
         <?php 
         if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 0){
-            $age = "A discussão teve um comportamento explosivo durando apenas um dia";
+            $age = "A discussão teve um comportamento explosivo durando apenas um dia (fogo de palha) ";
         }else{            
-            $query = " SELECT CASE 
-                        WHEN data_criacao = DATA_INICIAL THEN 'Esta discussão teve mais postagens no início'
-                        WHEN data_criacao = DATA_FINAL THEN 'Esta discussão teve mais postagens no início'
-                    ELSE 
-                        'MEIO'
-                    END LOCALIZACAO,
-                        data_criacao, COMENTARIOS_DIA, TOTAL_COMENTARIOS, (COMENTARIOS_DIA/TOTAL_COMENTARIOS) AS PORCENTAGEM 
-                    FROM 
-                    (
-                        SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d') AS data_criacao, count(id) AS COMENTARIOS_DIA	
-                        FROM 		".$_GET['link_id']."
-                        GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
-                        ORDER BY 	created_utc
-                    )A
-                    LEFT JOIN 
-                    (
-                        SELECT 		 count(id) AS TOTAL_COMENTARIOS
-                        FROM 		".$_GET['link_id']."
-                    )B
-                    ON 1 = 1 
-                    LEFT JOIN
-                    (
-                        SELECT 		MIN(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_INICIAL, MAX(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_FINAL
-                        FROM 		".$_GET['link_id']."
-                    )C
-                    ON 1 = 1
-                    ORDER BY PORCENTAGEM DESC LIMIT 1"; 
+            $query = " SELECT 		CASE    WHEN data_criacao = DATA_INICIAL THEN 'DATA_INICIAL'
+                                            WHEN data_criacao = SEGUNDO_DIA THEN 'SEGUNDO_DIA'
+                                            WHEN data_criacao = DATA_FINAL THEN 'DATA_FINAL' 
+                                            ELSE 'INTERMEDIARIO' 
+                                    END LOCALIZACAO, 
+                                    COMENTARIOS_DIA, 
+                                    TOTAL_COMENTARIOS,
+                                    (COMENTARIOS_DIA / TOTAL_COMENTARIOS) PORCENTAGEM
+                        FROM 
+                                (
+                                    SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d') AS data_criacao, count(id) AS COMENTARIOS_DIA	
+                                    FROM 		".$_POST['link_id']."
+                                    GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
+                                    ORDER BY 	created_utc
+                                )A
+                        LEFT JOIN 
+                                (
+                                    SELECT 		 count(id) AS TOTAL_COMENTARIOS
+                                    FROM 		".$_POST['link_id']."
+                                )B
+                        ON 1 = 1 
+                        LEFT JOIN
+                                (
+                                    SELECT 		MIN(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_INICIAL, 
+                                                MAX(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_FINAL,
+                                                DATE_ADD(MIN(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')),INTERVAL 1 DAY) SEGUNDO_DIA
+                                    FROM 		".$_POST['link_id']."
+                                )C
+                        ON 1 = 1
+                        ORDER BY LOCALIZACAO"; 
+            //echo "<pre>".$query."</pre>";
             foreach($con->query($query) as $row) {
-                if ($row['PORCENTAGEM'] >= 0.75) {
-                    $age = $row['LOCALIZACAO'];
+                if ($row['LOCALIZACAO'] == 'DATA_FINAL' && $row['PORCENTAGEM'] >= 0.75) {
+                    $age = "Esta discussão teve mais postagens no final (explosão final)";
+                }elseif($row['LOCALIZACAO'] == 'DATA_INICIAL' && $row['PORCENTAGEM'] >= 0.75) {
+                    $age = "Esta discussão teve mais postagens no início (explosão inicial).";
+                }elseif($row['LOCALIZACAO'] == 'SEGUNDO_DIA' && $row['PORCENTAGEM'] <= 0.30) {
+                    $age = "Esta discussão começou quente mas esfriou no segundo dia";
                 }else{
+
                     $age = "Esta discussão teve postagens constantes ao longo de sua duração.";
                 }
             }
         }
 
-        $query = "SELECT 		DATE_FORMAT(DATE_SUB(MIN(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')),INTERVAL 1 DAY),'%d-%M') AS DIA, 
-                                    0 AS QTD_COMENTARIOS 
-                    FROM 		".$_GET['link_id']."
-                    
-                    UNION ALL
-                    
-                    SELECT 		A.DIA, A.QTD_COMENTARIOS
+        $query = "SELECT 		A.DIA, A.QTD_COMENTARIOS
                     FROM
                                 (
                                     SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%d-%M') AS DIA, 
                                                     count(id) AS QTD_COMENTARIOS	
-                                    FROM 		".$_GET['link_id']."
+                                    FROM 		".$_POST['link_id']."
                                     GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
                                     ORDER BY 	created_utc
-                                )A
-        
-                    UNION ALL
-        
-                    SELECT 		DATE_FORMAT(DATE_ADD(MIN(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')),INTERVAL 1 DAY),'%d-%M') AS DIA, 
-                                    0 AS QTD_COMENTARIOS
-                    FROM 		".$_GET['link_id']."";
-        // echo "<pre>".$query_score."</pre>";							
+                                )A";
+        //echo "<pre>".$query."</pre>";
         
         foreach($con->query($query) as $row) {
             $line_chart[] = [$row['DIA'],1*$row['QTD_COMENTARIOS']]; // NECESSÁRIO  MULTIPLICAR O VALOR POR 1 PARA PASSAR COMO O VALOR INTEGER POIS ESTAVA SENDO RECONHECIDO COMO STRING
@@ -129,12 +126,22 @@
 
     // Set chart options
     var options = {'title':'Posts x dia',
-                    'width':200,
-                    'height':100,
-                    legend: {position: 'none'}};
+                    'width':180,
+                    'height':180,
+
+                    legend: {position: 'none'},
+                    hAxis: {
+                            slantedText:true,
+
+                            },       
+                    vAxis: { 
+                            gridlines: { count: 3 }
+                            },
+                            
+                    };
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
     chart.draw(data, options);
     }
 
