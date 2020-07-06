@@ -70,7 +70,7 @@ foreach($con->query($query) as $row) {
         </button>
       </div>
       <div class="modal-body">
-        Identifica se algum comentário concentrou os votos da discussão. (Se está a 10 vezes a cima do desvio padrão de votos).
+        Identifica se algum comentário concentrou os votos da discussão. (Se está a 3 vezes a cima do desvio padrão de votos).
       </div>
     </div>
   </div>

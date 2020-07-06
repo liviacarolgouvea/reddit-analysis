@@ -51,7 +51,7 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 	</tr>
 	<tr>
 		<td colspan="2">
-			<a class="btn btn-primary btn-lg btn-block"  href="" target="_blank" style="float: right;">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			<a class="btn btn-primary btn-lg btn-block"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank" style="float: right;">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 		</td>
 	</tr>
 </table>

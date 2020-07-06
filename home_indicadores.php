@@ -31,11 +31,11 @@
 			<h5>Dúvidas</h5>
 			Esta pesquisa está sendo realizada pela aluna de mestrado Lívia Gouvêa sob orientação da professora Ana Cristina Bicharra Garcia.
 			<br>
-			Em caso de dúvidas voce pode entrar em contato pelo email <b>livia.faria@uniriote.br</b>
+			Em caso de dúvidas voce pode entrar em contato pelo email <b>livia.faria@uniriotec.br</b>
 		</p>			  			  
 	</div>
 	<form action="index.php" method="post">
-			<input type="hidden" name="link_id" value="gpohgh">	
+			<input type="hidden" name="link_id" value="<?php echo $_GET['link_id']?>">	
 			<input type="hidden" name="indicadores" value="sim">			  
 		<input type="submit" class="btn btn-info btn-lg	 animated fadeIn" value="Prosseguir">
 	</form>	

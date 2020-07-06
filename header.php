@@ -34,7 +34,7 @@ WHERE subreddit = 'politics'  -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
-    	<title>Dissertação</title>
+    	<title>Experimento</title>
 
 
   	</head>

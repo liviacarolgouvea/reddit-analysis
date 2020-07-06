@@ -22,7 +22,7 @@ function buildTree(array &$elements, string $parentId): array
 
 if ($_POST['link_id']) {
     $query = "
-    SELECT id, author, REPLACE(body,'b','') as body,
+    SELECT id, author, body,
           REPLACE(parent_id, 't1_', '') parent_id,
           1 AS total
     FROM ".$_POST['link_id'];
@@ -38,6 +38,7 @@ if ($_POST['link_id']) {
         return $carry;
     });
     $limit = 0.25 * $total;
+    $ultrapassou = array();
     foreach($x as $id => $item) {
         if ($item['total'] >= $limit) {
             $ultrapassou[$id] = ["body" => $item['body'], "author" => $item['author']];
@@ -76,7 +77,7 @@ if ($_POST['link_id']) {
         <?php
         }
       }else{
-        echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
+        echo "<h4 class='card-title'>A respostas estão bem distribuídas entre os comentários</h4>";
       }?>
   </div>
 </div>
@@ -94,7 +95,7 @@ if ($_POST['link_id']) {
         </button>
       </div>
       <div class="modal-body">
-        Identifica quando pelo menos 25% da discussão está centrada em um algum comentário de primeiro nível.
+        Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a um algum comentário de primeiro nível.)
       </div>
     </div>
   </div>

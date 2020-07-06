@@ -73,7 +73,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Identifica se algum autor fez mais comentários do que o restante. (Se comentou 10 vezes a cima do desvio padrão de comentários).
+        Identifica se algum autor fez mais comentários do que o restante. (Se comentou 3 vezes a cima do desvio padrão de comentários).
       </div>
     </div>
   </div>

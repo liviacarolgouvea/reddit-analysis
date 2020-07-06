@@ -43,7 +43,7 @@
         </button>
       </div>
       <div class="modal-body">
-        No Reddit alguns comentários são excluídos pelo autor do comentário ou pelos moderadores, caso viole as regras do subreddit, podendo causar controvérsia.
+        No Reddit alguns comentários são excluídos pelos moderadores, caso viole as regras do subreddit, podendo causar controvérsia.
         <br>
         A medida de controvérsia calcula a proporção entre o número de comentários excluídos e o número total de comentários da discussão.
         
