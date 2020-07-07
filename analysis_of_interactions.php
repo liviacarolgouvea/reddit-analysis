@@ -71,7 +71,7 @@ if ($_POST['link_id']) {
                 </a>
               </div>
               <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
-                <?php echo substr($value['body'], 1, -1); ?>
+                <?php echo $value['body']; ?>
               </div>
           </div>	
         <?php
@@ -95,7 +95,7 @@ if ($_POST['link_id']) {
         </button>
       </div>
       <div class="modal-body">
-        Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a um algum comentário de primeiro nível.)
+        Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a algum comentário de primeiro nível.)
       </div>
     </div>
   </div>

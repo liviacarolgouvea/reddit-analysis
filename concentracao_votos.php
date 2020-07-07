@@ -36,7 +36,7 @@ foreach($con->query($query) as $row) {
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
-          echo "O comentário foi removido pelo moderador";
+          echo "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
         }else{ ?>      
           <div id="#concentracao_votos<?php echo $id; ?>" >              
               <div id="#brief_concentracao_votos<?php echo $id; ?>" class="card-text">

@@ -83,7 +83,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Pode-se identificar 4 tipos de comportamento nas evolução das postagens na discussão:
+        Pode-se identificar 4 tipos de comportamento na evolução das postagens na discussão:
             <ul>
                 <li>
                     Discussões com comportamento explosivo, que duram apenas um dia.

@@ -15,7 +15,7 @@
 		<p>
 			<h5>Detalhamento das etapas</h5>	
 			<p>
-				Ao clicar no botão "Prosseguir" o sistema exibirá uma página, onde do lado esquerdo, exibirá algumas caixas com indicadores e do lado direito, um resumo seguido de um tópico de discussão do Reddit. Os indicadores e resumo se referem a este tópico de discussão.
+				Ao clicar no botão "Prosseguir" o sistema exibirá uma página onde, do lado esquerdo, exibirá algumas caixas com indicadores e, do lado direito, um resumo seguido de um tópico de discussão do Reddit. Os indicadores e resumo se referem a este tópico de discussão.
 			</p>
 			<p>
 				No final da página haverá um botão que te direcionará para para um questionário com perguntas para você responder a respeito da experiência vivenciada. 
