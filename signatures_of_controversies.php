@@ -1,14 +1,14 @@
 <div class="card">
   <div class="card-header">
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalSignaturesOfControversies"></i>    
-    <b>Medida de controvérsia:</b>
+    <!-- <b>Medida de controvérsia:</b> -->
       <?php
       $sql_controversy = "SELECT TOTAL_COMMENTS, DELETED, (DELETED / TOTAL_COMMENTS) * 100 AS PORCENTAGEM
                           
                           FROM
                           (
                               SELECT 	COUNT(id) AS DELETED 
-                              FROM 	  ".$_POST['link_id']."
+                              FROM 	  ".$_GET['link_id']."
                               WHERE 	body = '[removed];' OR body LIKE 'Your comment has been removed%'
                           )A
                               
@@ -16,7 +16,7 @@
                               
                           (	
                               SELECT 	COUNT(id) AS TOTAL_COMMENTS 
-                              FROM 	".$_POST['link_id']."
+                              FROM 	".$_GET['link_id']."
                           )B	
 
                           ON 1 = 1";
@@ -25,9 +25,11 @@
       $result->execute();
       $row_controversy = $result->fetchAll(\PDO::FETCH_ASSOC);
       if(round($row_controversy[0]['PORCENTAGEM'],1) == 0){
-        echo "<h4 class='card-title'>Não foi detectada controvérsia nesta discussão</h4>";
-      }else{        
-        echo "<h4 class='card-title'>O grau de controvérsia desta discussão é de ". round($row_controversy[0]['PORCENTAGEM'],1)."%</h4>";
+        echo "<h4 class='card-title'>Nenhum comentário ofensivo foi detectado.</h4>";
+      }elseif(round($row_controversy[0]['PORCENTAGEM'],1) >= 20){
+        echo "<h4 class='card-title'>Esta conversa está bastante controversa</h4>";
+      }else{
+        echo "<h4 class='card-title'>Esta conversa não está muito controversa</h4>";
       }?>
   </div>
 </div>
@@ -43,10 +45,13 @@
         </button>
       </div>
       <div class="modal-body">
-        No Reddit alguns comentários são excluídos pelos moderadores, caso viole as regras do subreddit, podendo causar controvérsia.
-        <br>
-        A medida de controvérsia calcula a proporção entre o número de comentários excluídos e o número total de comentários da discussão.
+        <p> No Reddit alguns comentários são excluídos pelos moderadores caso violem as regras do fórum, podendo causar controvérsia.</p>
         
+        <p>A pontuação de de controvérsia da discussão é calculada pela proporção entre o número de comentários excluídos e o número total de comentários da discussão.</p>
+        
+        <p>Uma conversa é considerada controversa se esta pontuação for maior que 20.</p>
+        
+        <p>A pontuação de controvérsia desta discussão é <?php echo round($row_controversy[0]['PORCENTAGEM'],1); ?></p>
       </div>
     </div>
   </div>

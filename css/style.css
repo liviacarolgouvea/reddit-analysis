@@ -83,3 +83,21 @@ h5{
 p{
     text-align: justify;
 }
+
+
+.container{
+    background: white; 
+    border:1px solid #cccccc";
+}
+
+.lead {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.btn-lg{
+    width: 100%;
+}

@@ -3,13 +3,13 @@ $query = "	SELECT 	  A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO
             FROM 
                   (
                       SELECT    id, body, ABS(score) as SCORE
-                      FROM      ".$_POST['link_id']."
+                      FROM      ".$_GET['link_id']."
                   ) A
             LEFT JOIN            
                   (
                       SELECT 		AVG(ABS(score)) AS MEDIA,
                                 STD(ABS(score)) AS DESVIO_PADRAO							
-                      FROM 		  ".$_POST['link_id']."																				
+                      FROM 		  ".$_GET['link_id']."
                   ) B
                               
             ON 			1 = 1";
@@ -26,29 +26,31 @@ foreach($con->query($query) as $row) {
 <div class="card">
   <div class="card-header">  
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
-    <b>Destaque de votos</b>
+    <!-- <b>Destaque de votos</b> -->
     <?php
     if (!empty($concentracao_votos)) { 
       if(count($concentracao_votos) > 1){
-        echo "<h4 class='card-title'>Alguns comentários se destacaram por obterem muito votos:</h4>";
+        echo "<h4 class='card-title'>Os seguintes comentários se destacaram por obterem muito votos:</h4>";
       }else{
-        echo "<h4 class='card-title'>Um comentário se destacou por obter muitos votos:</h4>";
+        echo "<h4 class='card-title'>O seguinte comentário se destacou por obter muitos votos:</h4>";
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
           echo "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
         }else{ ?>      
-          <div id="#concentracao_votos<?php echo $id; ?>" >              
-              <div id="#brief_concentracao_votos<?php echo $id; ?>" class="card-text">
-                <?php echo substr($value,0,80).'... ';?>                         
+          <div id="#concentracao_votos<?php echo $id; ?>" >
+            <div class="card-text">
+              <div id="#brief_concentracao_votos<?php echo $id; ?>">
+                <?php echo substr($value,0,115).'... ';?>
                 <a  data-toggle="collapse" data-target="#concentracao_votos<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = 'white'";></i>
+                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = 'transparent'";></i>
                   <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = '#747373'";></i>                
                 </a>
               </div>
-              <div id="concentracao_votos<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#concentracao_votos<?php echo $id; ?>">
-                <?php echo substr($value, 1, -1); ?>
-              </div>
+            </div>
+            <div id="concentracao_votos<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#concentracao_votos<?php echo $id; ?>">
+              <?php echo $value; ?>
+            </div>
           </div>	
         <?php
         }

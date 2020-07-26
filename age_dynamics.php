@@ -1,7 +1,8 @@
 <div class="card">
     <div class="card-header">
         <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i>
-        <b>Dinâmica temporal:</b>        
+        <!-- <b>Dinâmica temporal:</b> -->
+        <h4 class="card-title">Evolução temporal dos comentários</h4>
         <?php 
         if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 0){
             $age = "A discussão teve um comportamento explosivo durando apenas um dia (fogo de palha) ";
@@ -17,14 +18,14 @@
                         FROM 
                                 (
                                     SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d') AS data_criacao, count(id) AS COMENTARIOS_DIA	
-                                    FROM 		".$_POST['link_id']."
+                                    FROM 		".$_GET['link_id']."
                                     GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
                                     ORDER BY 	created_utc
                                 )A
                         LEFT JOIN 
                                 (
                                     SELECT 		 count(id) AS TOTAL_COMENTARIOS
-                                    FROM 		".$_POST['link_id']."
+                                    FROM 		".$_GET['link_id']."
                                 )B
                         ON 1 = 1 
                         LEFT JOIN
@@ -32,7 +33,7 @@
                                     SELECT 		MIN(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_INICIAL, 
                                                 MAX(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')) DATA_FINAL,
                                                 DATE_ADD(MIN(DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%Y-%m-%d')),INTERVAL 1 DAY) SEGUNDO_DIA
-                                    FROM 		".$_POST['link_id']."
+                                    FROM 		".$_GET['link_id']."
                                 )C
                         ON 1 = 1
                         ORDER BY LOCALIZACAO"; 
@@ -46,7 +47,7 @@
                     $age = "Esta discussão começou quente mas esfriou no segundo dia";
                 }else{
 
-                    $age = "Esta discussão teve postagens constantes ao longo de sua duração.";
+                    $age = "";
                 }
             }
         }
@@ -56,7 +57,7 @@
                                 (
                                     SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%d-%M') AS DIA, 
                                                     count(id) AS QTD_COMENTARIOS	
-                                    FROM 		".$_POST['link_id']."
+                                    FROM 		".$_GET['link_id']."
                                     GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
                                     ORDER BY 	created_utc
                                 )A";
@@ -126,8 +127,8 @@
 
     // Set chart options
     var options = {'title':'Posts x dia',
-                    'width':180,
-                    'height':180,
+                    'width':200,
+                    'height':150,
 
                     legend: {position: 'none'},
                     hAxis: {

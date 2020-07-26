@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>    
-    <b>Comportamento monopolista: </b>      
+    <!-- <b>Comportamento monopolista: </b> -->
       <?php
       $query = "SELECT			A.author, 
                             A.count_id, 
@@ -12,8 +12,8 @@
 
                 FROM 		(                        
                             SELECT 		author, count(distinct id) AS count_id 
-                            FROM 		".$_POST['link_id']."
-                            WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
+                            FROM 		  ".$_GET['link_id']."
+                            WHERE 		author <> '[deleted]'
                             GROUP BY 	author     
                             ORDER BY 	count_id desc
                         ) A
@@ -24,8 +24,8 @@
                                       STD(X.count_id) AS DESVIO_PADRAO
                             FROM 		(
                                       SELECT 		author, COUNT(DISTINCT id) AS count_id
-                                      FROM 		".$_POST['link_id']."
-                                      WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
+                                      FROM 		  ".$_GET['link_id']."
+                                      WHERE 		author <> '[deleted]'
                                       GROUP BY 	author
                                     ) X
                         ) B
@@ -35,8 +35,8 @@
                 LEFT JOIN 	
                         (
                             SELECT 		count(distinct author) AS QTD_AUTORES
-                            FROM 		  ".$_POST['link_id']."
-                            WHERE 		link_id = 't3_".$_POST['link_id']."' AND author <> '[deleted]'
+                            FROM 		  ".$_GET['link_id']."
+                            WHERE 		link_id = author <> '[deleted]'
                         ) C 
                 ON 			1 = 1";
       // echo "<pre>".$query_score."</pre>";							
@@ -48,9 +48,9 @@
       }
       if (!empty($authors)) { 
         if(count($authors) > 1){
-          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista em alguns autores que falaram mais que o restante:</h4>";
+          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista nos seguintes autores que falaram mais que o restante:</h4>";
         }else{
-          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista em um autor que falou mais que o restante:</h4>";
+          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista no seguinte autor que falou mais que o restante:</h4>";
         }
         foreach ($authors as $id => $value) {
           echo "<div class='card-text' style='margin-left:40%; padding:3px;'><img src='img/avatar_1.png' width='20px'> 

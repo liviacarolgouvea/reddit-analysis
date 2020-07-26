@@ -1,14 +1,38 @@
 <?php 
 
+//http://localhost?link_id=ger4qu
+
+
 include_once "header.php";
 		
 include_once "con.php";
 
-if(isset($_GET['tipo'])){
-	include_once "home_".$_GET['tipo'].".php";
+
+$chrome = strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome') ?  true : false;
+
+if(!$chrome){
+    echo "<h2 style='text-align:center;margin-top:10%'>Por favor, abra este experimento em um navegador Chrome<h2>";
 }else{
-	include_once "prototipo.php";
+
+    if($_GET['page']){
+
+        include_once $_GET['page'].".php";
+
+    }else{
+
+        $random = rand(1,100);
+
+        if(($random % 2) == 0){
+            $type = "indicadores";
+        }else{
+            $type = "resumo";
+        }
+        include_once "description.php";
+        echo $type;
+
+    }
 }
- include_once "footer.php";
+
+include_once "footer.php";
  
  ?>		

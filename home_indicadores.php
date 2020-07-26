@@ -9,7 +9,10 @@
 		<p>
 			<h5>Objetivo do estudo</h5>			
 			<p>
-				O objetivo desse experimento é investigar se é possível aumentar a compreensão do usuário sobre uma discussão em andamento em um fórum de discussões a partir da apresentação simultânea de indicadores da dinâmica dessa discussão. Nosso estudo de caso é o site Reddit, a plataforma de fóruns de discussão mais popularmente utilizada no mundo.
+				O objetivo desse experimento é investigar se é possível aumentar a compreensão do usuário sobre uma discussão em andamento em um fórum de discussões a partir da apresentação simultânea de indicadores da dinâmica dessa discussão. 
+			</p>
+			<p>
+				Nosso estudo de caso é o site Reddit, a plataforma de fóruns de discussão mais popularmente utilizada no mundo.
 			</p>
 		</p>  
 		<p>
@@ -43,10 +46,6 @@
 			</p>
 		</p>			  			  
 	</div>
-	<form action="index.php" method="post">
-			<input type="hidden" name="link_id" value="<?php echo $_GET['link_id']?>">	
-			<input type="hidden" name="indicadores" value="sim">			  
-		<input type="submit" class="btn btn-info btn-lg	 animated fadeIn" value="Prosseguir">
-	</form>	
+	<a class="btn btn-primary" href="index.php?page=prototipo&link_id=<?php echo $_GET['link_id']?>&indicadores=1" role="button">Prosseguir</a>
   </div>
   <!-- /Start your project here-->

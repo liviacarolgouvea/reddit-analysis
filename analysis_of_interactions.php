@@ -20,19 +20,19 @@ function buildTree(array &$elements, string $parentId): array
     return $branch;
 }
 
-if ($_POST['link_id']) {
+if ($_GET['link_id']) {
     $query = "
     SELECT id, author, body,
           REPLACE(parent_id, 't1_', '') parent_id,
           1 AS total
-    FROM ".$_POST['link_id'];
+    FROM ".$_GET['link_id'];
 
     $array = array();
     
     $stmt=$con->prepare($query);
     $stmt->execute();
     $array = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    $x = buildTree($array, 't3_'.$_POST['link_id']);
+    $x = buildTree($array, 't3_'.$_GET['link_id']);
     $total = array_reduce($x, function($carry, $item){
         $carry += $item['total'];
         return $carry;
@@ -49,30 +49,32 @@ if ($_POST['link_id']) {
 <div class="card">
   <div class="card-header">  
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
-    <b>Análise da interação</b>
+    <!-- <b>Análise da interação</b> -->
     <?php
     $count = count($ultrapassou);
     if (!empty($ultrapassou)) { 
       if(count($ultrapassou) > 1){?>
-        <h4 class="card-title">Alguns comentários concentraram mais repostas:</h4>
+        <h4 class="card-title">Os seguintes comentários concentraram mais repostas:</h4>
       <?php }else{ ?>
-        <h4 class="card-title">Um comentário concentrou mais repostas:</h4>
+        <h4 class="card-title">O seguinte comentário concentrou mais repostas:</h4>
       <?php }?>
       
         <?php
         foreach($ultrapassou as $id => $value) { ?>      
 
-          <div id="#<?php echo $id; ?>" >              
-              <div id="#brief_<?php echo $id; ?>" class="card-text">
-                <?php echo substr($value['body'],0,80).'... ';?>                         
+          <div id="#<?php echo $id; ?>" >
+            <div class="card-text">
+              <div id="#brief_<?php echo $id; ?>">
+                <?php echo substr($value['body'],0,115).'... ';?>
                 <a  data-toggle="collapse" data-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'white'";></i>
+                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'transparent'";></i>
                   <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
                 </a>
               </div>
-              <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
-                <?php echo $value['body']; ?>
-              </div>
+            </div>
+            <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
+              <?php echo $value['body']; ?>
+            </div>
           </div>	
         <?php
         }

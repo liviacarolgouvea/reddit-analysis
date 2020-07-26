@@ -33,6 +33,14 @@ WHERE subreddit = 'politics'  -->
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".exportLabel").click(function(){
+    alert("Submitted");
+  });
+});
+</script>
 
     	<title>Experimento</title>
 
