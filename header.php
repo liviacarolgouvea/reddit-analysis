@@ -1,6 +1,6 @@
 <?php
-header('X-Frame-Options: ALLOW');
-header('X-Frame-Options: GOFORIT');
+//header('X-Frame-Options: ALLOW');
+//header('X-Frame-Options: GOFORIT');
 ?>
 <!-- CHAMAR PÁGINA: http://localhost/codigo/index.php?link_id=32czwg -->
 <!-- RESTAURAR BANCO: mysql -u root -h localhost --protocol=tcp -p < reddit.sql -->
@@ -36,12 +36,18 @@ WHERE subreddit = 'politics'  -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  $(".exportLabel").click(function(){
-    alert("Submitted");
-  });
-});
-</script>
 
+   var screenwidth = screen.width;
+
+	if(screenwidth <= 768){
+		if (document.cookie.indexOf('first_visit') == -1) {
+			document.cookie = "first_visit";
+			window.location.href="index.php?link_id=<?php echo $_GET['link_id']?>&screenwidth="+screenwidth;
+		}
+	}
+});
+
+</script>
     	<title>Experimento</title>
 
 
