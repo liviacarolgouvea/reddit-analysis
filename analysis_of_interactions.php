@@ -54,31 +54,30 @@ if ($_GET['link_id']) {
     $count = count($ultrapassou);
     if (!empty($ultrapassou)) { 
       if(count($ultrapassou) > 1){?>
-        <h4 class="card-title">Os seguintes comentários concentraram mais repostas:</h4>
+        <h4 class="card-title"><?php echo $count;?> <b>comentários concentraram mais repostas.</b></h4>
       <?php }else{ ?>
-        <h4 class="card-title">O seguinte comentário concentrou mais repostas:</h4>
+        <h4 class="card-title"><?php echo $count;?>  <b>comentário concentrou mais repostas.</b></h4>
       <?php }?>
       
         <?php
-        foreach($ultrapassou as $id => $value) { ?>      
-
-          <div id="#<?php echo $id; ?>" >
-            <div class="card-text">
-              <div id="#brief_<?php echo $id; ?>">
-                <?php echo substr($value['body'],0,115).'... ';?>
-                <a  data-toggle="collapse" data-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = 'transparent'";></i>
-                  <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_<?php echo $id; ?>').style.color = '#747373'";></i>                
+        foreach($ultrapassou as $id => $value) {
+        $modal .= "
+          <div id='#" . $id . "'>
+            <div id='#brief_". $id ."'>" .
+                 substr($value['body'],0,106).'... ' . "
+                <a  data-toggle='collapse' data-target='#". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
+                  <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = 'transparent'\";></i>
+                  <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = '#0c0c0c'\";></i>
                 </a>
-              </div>
             </div>
-            <div id="<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#<?php echo $id; ?>">
-              <?php echo $value['body']; ?>
+            <div id=". $id ." class='collapse' aria-labelledby='headingTwo' data-parent='#". $id ."'>" .
+               $value['body'] ."
             </div>
-          </div>	
-        <?php
-        }
-      }else{
+          </div><br>";
+        }?>
+        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/>
+
+      <?php }else{
         echo "<h4 class='card-title'>A respostas estão bem distribuídas entre os comentários</h4>";
       }?>
   </div>
@@ -98,6 +97,23 @@ if ($_GET['link_id']) {
       </div>
       <div class="modal-body">
         Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a algum comentário de primeiro nível.)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalComments" tabindex="-1" role="dialog" aria-labelledby="modalCommentsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php echo $modal;?>
       </div>
     </div>
   </div>

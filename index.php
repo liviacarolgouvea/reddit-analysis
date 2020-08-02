@@ -36,7 +36,7 @@ if(!$chrome){
             $type = "resumo";
         }
         include_once "description.php";
-        echo $type;
+        echo "<b style='color:transparent'>".$type."</b>";
 
     }
 }

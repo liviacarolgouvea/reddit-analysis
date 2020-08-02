@@ -28,34 +28,34 @@ foreach($con->query($query) as $row) {
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
     <!-- <b>Destaque de votos</b> -->
     <?php
+    $count = count($concentracao_votos);
     if (!empty($concentracao_votos)) { 
       if(count($concentracao_votos) > 1){
-        echo "<h4 class='card-title'>Os seguintes comentários se destacaram por obterem muito votos:</h4>";
+        echo "<h4 class='card-title'>".$count." <b>comentários se destacaram por obterem muito votos.</b></h4>";
       }else{
-        echo "<h4 class='card-title'>O seguinte comentário se destacou por obter muitos votos:</h4>";
+        echo "<h4 class='card-title'>".$count." <b>comentário se destacou por obter muitos votos.</b></h4>";
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
-          echo "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
-        }else{ ?>      
-          <div id="#concentracao_votos<?php echo $id; ?>" >
-            <div class="card-text">
-              <div id="#brief_concentracao_votos<?php echo $id; ?>">
-                <?php echo substr($value,0,115).'... ';?>
-                <a  data-toggle="collapse" data-target="#concentracao_votos<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fa fa-plus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = 'transparent'";></i>
-                  <i class="fa fa-minus-square-o" onclick="document.getElementById('#brief_concentracao_votos<?php echo $id; ?>').style.color = '#747373'";></i>                
+          $moda_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
+        }else{
+          $moda_votos .= "
+          <div id='#concentracao_votos". $id ."'>
+            <div id='#brief_concentracao_votos". $id ."'>".
+                substr($value,0,106).'... ' . "
+                <a  data-toggle='collapse' data-target='#concentracao_votos". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
+                  <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = 'transparent'\";></i>
+                  <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = '#0c0c0c'\";></i>
                 </a>
-              </div>
             </div>
-            <div id="concentracao_votos<?php echo $id; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#concentracao_votos<?php echo $id; ?>">
-              <?php echo $value; ?>
+            <div id='concentracao_votos". $id ."' class='collapse' aria-labelledby='headingTwo' data-parent='#concentracao_votos". $id ."'>".
+              $value ."
             </div>
-          </div>	
-        <?php
+          </div><br>";
         }
-      }
-    }else{
+      }?>
+      <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalCommentsVotes" value="Veja quais são"/>
+    <?php }else{
       echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
     }?>
   </div>
@@ -73,6 +73,23 @@ foreach($con->query($query) as $row) {
       </div>
       <div class="modal-body">
         Identifica se algum comentário concentrou os votos da discussão. (Se está a 3 vezes a cima do desvio padrão de votos).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCommentsVotes" tabindex="-1" role="dialog" aria-labelledby="modalCommentsVoteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php echo $moda_votos;?>
       </div>
     </div>
   </div>

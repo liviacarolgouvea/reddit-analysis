@@ -1,8 +1,8 @@
 <div class="card">
-    <div class="card-header">
-        <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i>
+    <div class="card-header" style="padding: 5px;">
+        <!-- <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i> -->
         <!-- <b>Dinâmica temporal:</b> -->
-        <h4 class="card-title">Evolução temporal dos comentários</h4>
+        <!-- <h4 class="card-title">Evolução temporal dos comentários</h4> -->
         <?php 
         if(!empty($row_caracteristica_conversa) && $row_caracteristica_conversa[0]['DURACAO'] == 0){
             $age = "A discussão teve um comportamento explosivo durando apenas um dia (fogo de palha) ";
@@ -69,7 +69,7 @@
         $json = json_encode($line_chart);           
         echo "<h4 class='card-title'>".$age."</h4>"; ?>
         <!--Div that will hold the chart-->        
-        <div id="chart_div" style="float:left; margin-left:35%; border:1px solid #eeeeee"></div>        
+        <div id="chart_div" style="border:1px solid #eeeeee"></div>
   </div>
 </div>
 
@@ -126,7 +126,7 @@
     data.addRows(<?php echo $json;?>);            
 
     // Set chart options
-    var options = {'title':'Posts x dia',
+    var options = {'title':'Quantidade de posts x dia',
                     'width':200,
                     'height':150,
 

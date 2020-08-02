@@ -17,7 +17,7 @@ $stmt->execute();
 $row_caracteristica_conversa = $stmt->fetchAll();
 ?>
 
-<div class="container" style='max-width:700px'>
+<div class="container">
 	<?php if($_GET['type'] ==  "indicadores"){?>
 	<p class="lead">
 		Abaixo temos o link para a discussão seguido de um breve resumo de seu conteúdo e algumas informações sobre a discussão.
@@ -33,38 +33,54 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 
 	<div class="row">
 		<div class="col-sm">
-			<div style="border: 1px solid red;">
-				<blockquote class="reddit-card" data-card-created="1556072778" >
-					<a href="https://www.reddit.com/comments/<?php echo $_GET['link_id']?>/"></a>
-				</blockquote>
-				<!-- <a href="https://www.reddit.com/comments/<?php // echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>	 -->
+			<div class="card">
+  				<div class="card-header">
+					<blockquote class="reddit-card" data-card-created="1556072778" >
+						<a href="https://www.reddit.com/comments/<?php echo $_GET['link_id']?>/"></a>
+					</blockquote>
+					<!-- <a href="https://www.reddit.com/comments/<?php // echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>	 -->
+  				</div>
 			</div>
-			<br>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
 			<?php include_once "summarization.php";?>
-			<br>
+		</div>
+	</div>
+	<br>
+	<div class="row">
 		<?php if($_GET['type'] ==  "indicadores"){?>
-			<div>
+			<div class="col-sm">
 				<?php include_once "analysis_of_interactions.php";?>
-				<br>
+			</div>
+			<div class="col-sm">
 				<?php include_once "concentracao_votos.php";?>
-				<br>
+			</div>
+			<div class="col-sm">
 				<?php include_once "monopolistic_behavior.php";?>
-				<br>
+			</div>
+			<div class="col-sm">
 				<?php include_once "signatures_of_controversies.php";?>
-				<br>
+			</div>
+			<div class="col-sm">
 				<?php include_once "age_dynamics.php";?>
 				<?php //include_once "mayfly_buzz_behavior.php";?>
 			</div>
 		<?php }?>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<?php if($_GET['type'] ==  "indicadores"){?>
+				<a class="btn btn-success btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			<?php }else{?>
+				<a class="btn btn-success btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+			<?php }?>
 		</div>
 	</div>
-	<div class="row">
-		<?php if($_GET['type'] ==  "indicadores"){?>
-			<a class="btn btn-primary btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-		<?php }else{?>
-			<a class="btn btn-primary btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-		<?php }?>
-	</div>
+	<br>
 </div>
 						
 <?php include_once "footer.php";?>		

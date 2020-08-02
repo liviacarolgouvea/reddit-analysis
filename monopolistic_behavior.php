@@ -47,17 +47,20 @@
         }        
       }
       if (!empty($authors)) { 
+        $count = count($authors);
         if(count($authors) > 1){
-          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista nos seguintes autores que falaram mais que o restante:</h4>";
+          echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>";
         }else{
-          echo "<h4 class='card-title'>Detectou-se um comportamento monopolista no seguinte autor que falou mais que o restante:</h4>";
+          echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>";
         }
         foreach ($authors as $id => $value) {
-          echo "<div class='card-text' style='margin-left:40%; padding:3px;'><img src='img/avatar_1.png' width='20px'> 
-                <a href='https://www.reddit.com/user/".$value."/' target='_blank'>".$value."</a>
-                </div>";
+          $modal_authors .= "<div style='margin-left:40%'><img src='img/avatar_1.png' width='20px'>
+                              <a href='https://www.reddit.com/user/".$value."/' target='_blank'>".$value."</a>
+                            </div><br>";
         }
       }?>
+      <br>
+      <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalAuthors" value="Veja quais são"/>
   </div>
 </div>
 
@@ -74,6 +77,23 @@
       </div>
       <div class="modal-body">
         Identifica se algum autor fez mais comentários do que o restante. (Se comentou 3 vezes a cima do desvio padrão de comentários).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAuthors" tabindex="-1" role="dialog" aria-labelledby="modalAuthorsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Autores</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php echo $modal_authors;?>
       </div>
     </div>
   </div>

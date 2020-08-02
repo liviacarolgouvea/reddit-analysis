@@ -25,7 +25,7 @@
       $result->execute();
       $row_controversy = $result->fetchAll(\PDO::FETCH_ASSOC);
       if(round($row_controversy[0]['PORCENTAGEM'],1) == 0){
-        echo "<h4 class='card-title'>Nenhum comentário ofensivo foi detectado.</h4>";
+        echo "<h4 class='card-title'><b>Nenhum comentário ofensivo foi detectado.</b></h4>";
       }elseif(round($row_controversy[0]['PORCENTAGEM'],1) >= 20){
         echo "<h4 class='card-title'>Esta conversa está bastante controversa</h4>";
       }else{
