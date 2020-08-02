@@ -35,6 +35,11 @@ if(!$chrome){
         }else{
             $type = "resumo";
         }
+
+        if($_GET['type']){
+            $type = $_GET['type'];
+        }
+
         include_once "description.php";
         echo "<b style='color:transparent'>".$type."</b>";
 
