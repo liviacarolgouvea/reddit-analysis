@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header" style="padding: 5px;">
+    <div class="card-header indicators" style="padding: 5px;">
         <!-- <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i> -->
         <!-- <b>Dinâmica temporal:</b> -->
         <!-- <h4 class="card-title">Evolução temporal dos comentários</h4> -->
@@ -67,7 +67,7 @@
             $line_chart[] = [$row['DIA'],1*$row['QTD_COMENTARIOS']]; // NECESSÁRIO  MULTIPLICAR O VALOR POR 1 PARA PASSAR COMO O VALOR INTEGER POIS ESTAVA SENDO RECONHECIDO COMO STRING
         }
         $json = json_encode($line_chart);           
-        echo "<h4 class='card-title'>".$age."</h4>"; ?>
+       // echo "<h4 class='card-title'>".$age."</h4>"; ?>
         <!--Div that will hold the chart-->        
         <div id="chart_div" style="border:1px solid #eeeeee"></div>
   </div>
@@ -129,14 +129,16 @@
     var options = {'title':'Quantidade de posts x dia',
                     'width':200,
                     'height':150,
+                    'backgroundColor': '#fab005',
+                    'colors': ['#e0440e'],
+                    'strokeWidth': 0,
 
                     legend: {position: 'none'},
                     hAxis: {
                             slantedText:true,
-
                             },       
                     vAxis: { 
-                            gridlines: { count: 3 }
+                            gridlines: { count: 3, color: '#000' }
                             },
                             
                     };

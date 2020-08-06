@@ -1535,7 +1535,7 @@ button.bg-light:focus {
   font-weight: 700; }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Arial", sans-serif;
   font-weight: 300; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -4663,8 +4663,8 @@ a.waves-effect, a.waves-light {
   font-size: 10em !important; }
 
 .btn-primary {
-  background-color: #4285f4 !important;
-  color: #fff; }
+  background-color: #FF7D21 !important;
+  color: #000; }
   .btn-primary:hover {
     background-color: #5a95f5;
     color: #fff; }

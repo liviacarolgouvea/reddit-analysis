@@ -20,8 +20,8 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 <div class="container">
 	<?php if($_GET['type'] ==  "indicadores"){?>
 	<p class="lead">
-		Abaixo temos o link para a discussão seguido de um breve resumo de seu conteúdo e algumas informações sobre a discussão.
-		Utilize o que for necessário para lhe ajudar na compreensão do debate. Em seguida, responda ao questionário.
+		Abaixo temos, no primeiro quadro, o link para a discussão, no quadro azul, um breve resumo do conteúdo da discussão e nos quadros amarelos, informações sobre a discussão.
+		Explore o que achar necessário para compreender o debate. Em seguida, responda ao questionário.
 	</p>
 	<?php }else{?>
 	<p class="lead">
@@ -74,9 +74,9 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 	<div class="row">
 		<div class="col-sm">
 			<?php if($_GET['type'] ==  "indicadores"){?>
-				<a class="btn btn-success btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				<a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 			<?php }else{?>
-				<a class="btn btn-success btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				<a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Responder ao questionário <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 			<?php }?>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header indicators">
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>    
     <!-- <b>Comportamento monopolista: </b> -->
       <?php

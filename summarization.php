@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header sumarization">
     <!-- <b>Resumo</b> -->
     <h4 class='card-title'>Resumo</h4>
     <div class="card-text overflow-auto" style="max-height: 200px">

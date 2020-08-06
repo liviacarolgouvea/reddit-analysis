@@ -24,7 +24,7 @@ foreach($con->query($query) as $row) {
 ?>
 
 <div class="card">
-  <div class="card-header">  
+  <div class="card-header indicators">  
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
     <!-- <b>Destaque de votos</b> -->
     <?php
@@ -32,8 +32,10 @@ foreach($con->query($query) as $row) {
     if (!empty($concentracao_votos)) { 
       if(count($concentracao_votos) > 1){
         echo "<h4 class='card-title'>".$count." <b>comentários se destacaram por obterem muito votos.</b></h4>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='Veja quais são'/>";
       }else{
         echo "<h4 class='card-title'>".$count." <b>comentário se destacou por obter muitos votos.</b></h4>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='Veja qual é'/>";
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
@@ -54,7 +56,7 @@ foreach($con->query($query) as $row) {
           </div><br>";
         }
       }?>
-      <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalCommentsVotes" value="Veja quais são"/>
+      
     <?php }else{
       echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
     }?>

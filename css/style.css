@@ -12,6 +12,7 @@
     border-radius: 5px;
     color: #1C1C1C;
     min-height: 130px;
+    text-align: center;
 }
 
 .card-header b{
@@ -102,6 +103,8 @@ p{
 
 .btn-lg{
     width: 100%;
+    background: #0d2c84;
+    color: #fff;
 }
 
 .fa-question-circle-o{
@@ -117,3 +120,10 @@ p{
     font-size: 12px !important;
 }
 
+.indicators{
+    background: #fab005;
+}
+
+.sumarization{
+    background: #B7DDDE;
+}

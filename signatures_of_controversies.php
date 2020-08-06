@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header indicators" style="display: table; vertical-align: middle;">
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalSignaturesOfControversies"></i>    
     <!-- <b>Medida de controvérsia:</b> -->
       <?php
