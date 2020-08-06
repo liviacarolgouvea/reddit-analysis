@@ -20,7 +20,7 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 <div class="container">
 	<?php if($_GET['type'] ==  "indicadores"){?>
 	<p class="lead">
-		Abaixo temos, no primeiro quadro, o link para a discussão, no quadro azul, um breve resumo do conteúdo da discussão e nos quadros amarelos, informações sobre a discussão.
+		Abaixo temos, no primeiro quadro, o link para a discussão. No quadro azul, um breve resumo do conteúdo da discussão. E nos quadros amarelos, informações sobre a discussão.
 		Explore o que achar necessário para compreender o debate. Em seguida, responda ao questionário.
 	</p>
 	<?php }else{?>
