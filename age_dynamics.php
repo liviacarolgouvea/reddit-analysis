@@ -55,7 +55,7 @@
         $query = "SELECT 		A.DIA, A.QTD_COMENTARIOS
                     FROM
                                 (
-                                    SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%d-%M') AS DIA, 
+                                    SELECT 		DATE_FORMAT(nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969'),'%d/%m') AS DIA, 
                                                     count(id) AS QTD_COMENTARIOS	
                                     FROM 		".$_GET['link_id']."
                                     GROUP BY 	nullif(from_unixtime(created_utc,'%Y-%m-%d'),'31/12/1969')
@@ -136,6 +136,7 @@
                     legend: {position: 'none'},
                     hAxis: {
                             slantedText:true,
+                            //slantedTextAngle:80 
                             },       
                     vAxis: { 
                             gridlines: { count: 3, color: '#000' }

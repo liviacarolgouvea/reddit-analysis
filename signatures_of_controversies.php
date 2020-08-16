@@ -9,7 +9,7 @@
                           (
                               SELECT 	COUNT(id) AS DELETED 
                               FROM 	  ".$_GET['link_id']."
-                              WHERE 	body = '[removed];' OR body LIKE 'Your comment has been removed%'
+                              WHERE 	body = '[removed];' OR body LIKE 'Your comment has been removed%' OR body  = '[deleted]'
                           )A
                               
                               LEFT JOIN
@@ -20,6 +20,7 @@
                           )B	
 
                           ON 1 = 1";
+      //echo "<pre>".$sql_controversy."</pre>";
 
       $result=$con->prepare($sql_controversy);
       $result->execute();
@@ -29,7 +30,7 @@
       }elseif(round($row_controversy[0]['PORCENTAGEM'],1) >= 20){
         echo "<h4 class='card-title'>Esta conversa está bastante controversa</h4>";
       }else{
-        echo "<h4 class='card-title'>Esta conversa não está muito controversa</h4>";
+        echo "<h4 class='card-title'>Esta discussão está um pouco controversa</h4>";
       }?>
   </div>
 </div>

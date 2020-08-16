@@ -1,8 +1,8 @@
 <?php
-$query = "	SELECT 	  A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
+$query = "	SELECT 	  A.id, A.body, A.body_html,  B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
             FROM 
                   (
-                      SELECT    id, body, ABS(score) as SCORE
+                      SELECT    id, body, body_html, ABS(score) as SCORE
                       FROM      ".$_GET['link_id']."
                   ) A
             LEFT JOIN            
@@ -14,10 +14,10 @@ $query = "	SELECT 	  A.id, A.body, B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO
                               
             ON 			1 = 1";
 //echo "<pre>".$query."</pre>";							
-
+$concentracao_votos = array();
 foreach($con->query($query) as $row) {
 	if($row['PERCENT'] > 3){ 
-		$concentracao_votos[$id] = $row['body'];
+		$concentracao_votos[$id] = ["body" => $row['body'], "body_html" => $row['body_html']];
  		
 	}
 }	
@@ -28,7 +28,8 @@ foreach($con->query($query) as $row) {
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
     <!-- <b>Destaque de votos</b> -->
     <?php
-    $count = count($concentracao_votos);
+    
+    $modal_votos = "";
     if (!empty($concentracao_votos)) { 
       if(count($concentracao_votos) > 1){
         echo "<h4 class='card-title'>".$count." <b>comentários se destacaram por obterem muito votos.</b></h4>";
@@ -39,19 +40,19 @@ foreach($con->query($query) as $row) {
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
-          $moda_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
+          $modal_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
         }else{
-          $moda_votos .= "
+          $modal_votos .= "
           <div id='#concentracao_votos". $id ."'>
-            <div id='#brief_concentracao_votos". $id ."'>".
-                substr($value,0,106).'... ' . "
-                <a  data-toggle='collapse' data-target='#concentracao_votos". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
-                  <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = 'transparent'\";></i>
-                  <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = '#0c0c0c'\";></i>
-                </a>
+            <div id='#brief_concentracao_votos". $id ."'>
+            ".substr($value['body'],0,95).'... ' . "
+              <a  data-toggle='collapse' data-target='#concentracao_votos". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
+                <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = 'transparent'\";></i>
+                <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = '#0c0c0c'\";></i>
+              </a>
             </div>
             <div id='concentracao_votos". $id ."' class='collapse' aria-labelledby='headingTwo' data-parent='#concentracao_votos". $id ."'>".
-              $value ."
+              $value['body_html'] ."
             </div>
           </div><br>";
         }
@@ -91,7 +92,7 @@ foreach($con->query($query) as $row) {
         </button>
       </div>
       <div class="modal-body">
-        <?php echo $moda_votos;?>
+        <?php echo $modal_votos;?>
       </div>
     </div>
   </div>

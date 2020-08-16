@@ -50,8 +50,10 @@
         $count = count($authors);
         if(count($authors) > 1){
           echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='Veja quais são'/>";
         }else{
           echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='Veja qual é'/>";
         }
         foreach ($authors as $id => $value) {
           $modal_authors .= "<div style='margin-left:40%'><img src='img/avatar_1.png' width='20px'>
@@ -59,8 +61,7 @@
                             </div><br>";
         }
       }?>
-      <br>
-      <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalAuthors" value="Veja quais são"/>
+      <br>      
   </div>
 </div>
 

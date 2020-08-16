@@ -35,10 +35,11 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 		<div class="col-sm">
 			<div class="card">
   				<div class="card-header">
-					<blockquote class="reddit-card" data-card-created="1556072778" >
-						<a href="https://www.reddit.com/comments/<?php echo $_GET['link_id']?>/"></a>
+					<blockquote class="reddit-card" data-card-created="1597519765" data-card-preview="0">
+						<a href="https://www.reddit.com/r/brasilivre/comments/<?php echo $_GET['link_id']?>/"></a>
 					</blockquote>
-					<!-- <a href="https://www.reddit.com/comments/<?php // echo $_GET['link_id']?>/" target="_blank">Ir para a discussão</a>	 -->
+					<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+					<a href="https://www.reddit.com/r/brasilivre/comments/<?php echo $_GET['link_id']?>" target="blank">Ir para a discussão</a>
   				</div>
 			</div>
 		</div>

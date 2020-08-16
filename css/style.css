@@ -127,3 +127,14 @@ p{
 .sumarization{
     background: #B7DDDE;
 }
+
+.card .description{
+    background: red !important;
+}
+h1 p{
+    display: none;
+}
+
+.card .action{
+    border: 10px solid blue;
+}

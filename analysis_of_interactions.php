@@ -22,7 +22,7 @@ function buildTree(array &$elements, string $parentId): array
 
 if ($_GET['link_id']) {
     $query = "
-    SELECT id, author, body,
+    SELECT id, author, body, body_html,
           REPLACE(parent_id, 't1_', '') parent_id,
           1 AS total
     FROM ".$_GET['link_id'];
@@ -41,7 +41,7 @@ if ($_GET['link_id']) {
     $ultrapassou = array();
     foreach($x as $id => $item) {
         if ($item['total'] >= $limit) {
-            $ultrapassou[$id] = ["body" => $item['body'], "author" => $item['author']];
+            $ultrapassou[$id] = ["body" => $item['body'], "body_html" => $item['body_html'], "author" => $item['author']];
         }
     }  
 }?>
@@ -55,27 +55,29 @@ if ($_GET['link_id']) {
     if (!empty($ultrapassou)) { 
       if(count($ultrapassou) > 1){?>
         <h4 class="card-title"><?php echo $count;?> <b>comentários concentraram mais repostas.</b></h4>
+        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/>
       <?php }else{ ?>
         <h4 class="card-title"><?php echo $count;?>  <b>comentário concentrou mais repostas.</b></h4>
+        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja qual é"/>
       <?php }?>
       
         <?php
         foreach($ultrapassou as $id => $value) {
         $modal .= "
           <div id='#" . $id . "'>
-            <div id='#brief_". $id ."'>" .
-                 substr($value['body'],0,106).'... ' . "
-                <a  data-toggle='collapse' data-target='#". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
-                  <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = 'transparent'\";></i>
-                  <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = '#0c0c0c'\";></i>
-                </a>
+            <div id='#brief_". $id ."'>
+              " .substr($value['body'],0,95).'... ' . "     
+              <a  data-toggle='collapse' data-target='#". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
+                <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = 'transparent'\";></i>
+                <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = '#0c0c0c'\";></i>
+              </a>                
             </div>
             <div id=". $id ." class='collapse' aria-labelledby='headingTwo' data-parent='#". $id ."'>" .
-               $value['body'] ."
+               $value['body_html'] ."
             </div>
           </div><br>";
         }?>
-        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/>
+        
 
       <?php }else{
         echo "<h4 class='card-title'>A respostas estão bem distribuídas entre os comentários</h4>";
