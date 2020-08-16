@@ -48,7 +48,7 @@
       <div class="modal-body">
         <p> No Reddit alguns comentários são excluídos pelos moderadores caso violem as regras do fórum, podendo causar controvérsia.</p>
         
-        <p>A pontuação de de controvérsia da discussão é calculada pela proporção entre o número de comentários excluídos e o número total de comentários da discussão.</p>
+        <p>A pontuação de controvérsia da discussão é calculada pela proporção entre o número de comentários excluídos e o número total de comentários da discussão.</p>
         
         <p>Uma conversa é considerada controversa se esta pontuação for maior que 20.</p>
         
