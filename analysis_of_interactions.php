@@ -54,11 +54,14 @@ if ($_GET['link_id']) {
     $count = count($ultrapassou);
     if (!empty($ultrapassou)) { 
       if(count($ultrapassou) > 1){?>
-        <h4 class="card-title"><?php echo $count;?> <b>comentários concentraram mais repostas.</b></h4>
-        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/>
+        <!-- <h4 class="card-title"><?php// echo $count;?> <b>comentários concentraram mais repostas.</b></h4> -->
+        <h4 class="card-title">Discussion is very <b> focused </b> in some comments</h4>
+        <!-- <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/> -->
+        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
       <?php }else{ ?>
-        <h4 class="card-title"><?php echo $count;?>  <b>comentário concentrou mais repostas.</b></h4>
-        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja qual é"/>
+        <!-- <h4 class="card-title"><?php echo $count;?>  <b>comentário concentrou mais repostas.</b></h4> -->
+        <h4 class="card-title">Discussion is very <b> focused </b> in one comment</h4>
+        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
       <?php }?>
       
         <?php
@@ -92,13 +95,15 @@ if ($_GET['link_id']) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Análise da interação</h5>
+        <!-- <h5 class="modal-title" id="modalAnalysisInteractionLabel">Análise da interação</h5> -->
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Interaction analysis</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a algum comentário de primeiro nível.)
+        <!-- Identifica se a discussão está concentrada em algum comentário de primeiro nível. (Quando pelo menos 25% dos comentários estão respondendo a algum comentário de primeiro nível.) -->
+        Identifies whether the discussion is focused on any first-level comments. (When at least 25% of comments are responding to some top-level comments.)
       </div>
     </div>
   </div>
@@ -109,7 +114,8 @@ if ($_GET['link_id']) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5>
+        <!-- <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5> -->
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comments</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

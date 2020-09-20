@@ -70,7 +70,13 @@ a[aria-expanded=true] .fa-plus-square-o {
 }
 
 .card-title{
+    font-size: 16px;
+}
+
+.card-title b{
     font-size: 18px;
+    font-weight: bold;
+    color: #ff4500;
 }
 
 .text-center{
@@ -97,7 +103,7 @@ p{
     text-align: center;
     padding: 10px;
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 
@@ -118,10 +124,12 @@ p{
 
 .fa-question-circle-o{
     font-size: 12px !important;
+    color: blue;
 }
 
 .indicators{
     background: #fab005;
+    padding-top: 25px;
 }
 
 .sumarization{

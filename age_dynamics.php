@@ -126,7 +126,7 @@
     data.addRows(<?php echo $json;?>);            
 
     // Set chart options
-    var options = {'title':'Quantidade de posts x dia',
+    var options = {'title':'Posts x day',
                     'width':200,
                     'height':150,
                     'backgroundColor': '#fab005',

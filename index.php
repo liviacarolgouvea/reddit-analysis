@@ -1,4 +1,5 @@
-
+<!-- iumbm7
+https://www.reddit.com/r/politics/comments/iumbm7/fbi_director_wray_says_russia_is_actively/ -->
 <?php 
 
 //http://localhost?link_id=ger4qu
@@ -39,9 +40,9 @@ if(!$chrome){
         if($_GET['type']){
             $type = $_GET['type'];
         }
-
+        echo "<b style='color:transparent; float:left'>".$type."</b>";
         include_once "description.php";
-        echo "<b style='color:transparent'>".$type."</b>";
+
 
     }
 }

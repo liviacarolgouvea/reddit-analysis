@@ -49,11 +49,13 @@
       if (!empty($authors)) { 
         $count = count($authors);
         if(count($authors) > 1){
-          echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>";
-          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='Veja quais são'/>";
+          /* echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>"; */
+          echo "<h4 class='card-title'>Discussion is <b> monopolized </b> by some participants</h4>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
         }else{
-          echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>";
-          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='Veja qual é'/>";
+          /* echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>"; */
+          echo "<h4 class='card-title'>Discussion is <b> monopolized </b> one participants</h4>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
         }
         foreach ($authors as $id => $value) {
           $modal_authors .= "<div style='margin-left:40%'><img src='img/avatar_1.png' width='20px'>
@@ -71,13 +73,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalMonopolisticBehavior">Comportamento monopolista</h5>
+        <!-- <h5 class="modal-title" id="modalMonopolisticBehavior">Comportamento monopolista</h5> -->
+        <h5 class="modal-title" id="modalMonopolisticBehavior">Monopolistic behavior</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Identifica se algum autor fez mais comentários do que o restante. (Se comentou 3 vezes a cima do desvio padrão de comentários).
+        <!-- Identifica se algum autor fez mais comentários do que o restante. (Se comentou 3 vezes a cima do desvio padrão de comentários). -->
+        Identifies whether any author has made more comments than the rest. (If commented 3 times over the standard deviation of comments).
       </div>
     </div>
   </div>
@@ -88,7 +92,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Autores</h5>
+        <!-- <h5 class="modal-title" id="modalAnalysisInteractionLabel">Autores</h5> -->
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Authors</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

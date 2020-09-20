@@ -32,11 +32,14 @@ foreach($con->query($query) as $row) {
     $modal_votos = "";
     if (!empty($concentracao_votos)) { 
       if(count($concentracao_votos) > 1){
-        echo "<h4 class='card-title'>".$count." <b>comentários se destacaram por obterem muito votos.</b></h4>";
-        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='Veja quais são'/>";
+        
+        /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentários se destacaram por obterem muito votos.</b></h4>"; */
+        echo "<h4 class='card-title'>There are some much <b> popular </b> comments in votes.</h4>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
       }else{
-        echo "<h4 class='card-title'>".$count." <b>comentário se destacou por obter muitos votos.</b></h4>";
-        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='Veja qual é'/>";
+        /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentário se destacou por obter muitos votos.</b></h4>"; */
+        echo "<h4 class='card-title'>There is a much <b> popular </b> comment in votes.</h4>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
       }      
       foreach($concentracao_votos as $id => $value) { 
         if($value == "[removed];"){
@@ -69,13 +72,15 @@ foreach($con->query($query) as $row) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalConcentracaoVotos">Concentração de votos</h5>
+        <!-- <h5 class="modal-title" id="modalConcentracaoVotos">Concentração de votos</h5> -->
+        <h5 class="modal-title" id="modalConcentracaoVotos">Concentration of votes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Identifica se algum comentário concentrou os votos da discussão. (Se está 3 vezes a cima do desvio padrão de votos).
+        <!-- Identifica se algum comentário concentrou os votos da discussão. (Se está 3 vezes a cima do desvio padrão de votos). -->
+        Identifies whether any comments concentrated the votes of the discussion. (If it is 3 times above the standard deviation of votes).
       </div>
     </div>
   </div>
@@ -86,7 +91,8 @@ foreach($con->query($query) as $row) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5>
+        <!-- <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comentários</h5> -->
+        <h5 class="modal-title" id="modalAnalysisInteractionLabel">Comments</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
