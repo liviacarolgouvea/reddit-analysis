@@ -1,24 +1,24 @@
 <div class="card">
   <div class="card-header indicators">
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>    
+    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>
     <!-- <b>Comportamento monopolista: </b> -->
       <?php
-      $query = "SELECT			A.author, 
-                            A.count_id, 
-                            B.MEDIA, 
-                            B.DESVIO_PADRAO, 
+      $query = "SELECT			A.author,
+                            A.count_id,
+                            B.MEDIA,
+                            B.DESVIO_PADRAO,
                             C.QTD_AUTORES,
                             A.count_id / B.DESVIO_PADRAO AS PERCENTAGE
 
-                FROM 		(                        
-                            SELECT 		author, count(distinct id) AS count_id 
+                FROM 		(
+                            SELECT 		author, count(distinct id) AS count_id
                             FROM 		  ".$_GET['link_id']."
                             WHERE 		author <> '[deleted]'
-                            GROUP BY 	author     
+                            GROUP BY 	author
                             ORDER BY 	count_id desc
                         ) A
 
-                LEFT JOIN 	
+                LEFT JOIN
                         (
                             SELECT 		AVG(X.count_id) AS MEDIA,
                                       STD(X.count_id) AS DESVIO_PADRAO
@@ -30,31 +30,35 @@
                                     ) X
                         ) B
 
-                ON			1 = 1            
+                ON			1 = 1
 
-                LEFT JOIN 	
+                LEFT JOIN
                         (
                             SELECT 		count(distinct author) AS QTD_AUTORES
                             FROM 		  ".$_GET['link_id']."
                             WHERE 		link_id = author <> '[deleted]'
-                        ) C 
+                        ) C
                 ON 			1 = 1";
-      // echo "<pre>".$query_score."</pre>";							
+      // echo "<pre>".$query_score."</pre>";
 
       foreach($con->query($query) as $row) {
         if ($row['PERCENTAGE'] > 3) {
           $authors[] = $row['author'];
-        }        
+        }
       }
-      if (!empty($authors)) { 
+      if (!empty($authors)) {
         $count = count($authors);
         if(count($authors) > 1){
           /* echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>"; */
+          echo "<i class='fa fa-users'></i>";
           echo "<h4 class='card-title'>Discussion is <b> monopolized </b> by some participants</h4>";
+          echo "<br>";
           echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
         }else{
           /* echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>"; */
+          echo "<i class='fa fa-users'></i>";
           echo "<h4 class='card-title'>Discussion is <b> monopolized </b> one participants</h4>";
+          echo "<br>";
           echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
         }
         foreach ($authors as $id => $value) {
@@ -63,7 +67,7 @@
                             </div><br>";
         }
       }?>
-      <br>      
+      <br>
   </div>
 </div>
 

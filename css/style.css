@@ -1,9 +1,9 @@
 .div-output{
-    
-    background:white; 
-    width: 100%; 
-    
-    
+
+    background:white;
+    width: 100%;
+
+
 }
 
 .card-header{
@@ -20,18 +20,18 @@
 }
 
 .modal-content{
-    text-align: justify;    
-    margin: 0 auto; 
+    text-align: justify;
+    margin: 0 auto;
     color: black !important;
 }
 
 .fa-plus-square-o, .fa-minus-square-o{
-    color:#ff4500; 
+    color:#ff4500;
     cursor: pointer;
 }
 
 .fa-question-circle-o{
-    color:#ff4500; 
+    color:#ff4500;
     cursor: pointer;
     margin-top: -5px;
     margin-right: -5px;
@@ -76,7 +76,7 @@ a[aria-expanded=true] .fa-plus-square-o {
 .card-title b{
     font-size: 18px;
     font-weight: bold;
-    color: #ff4500;
+    /* color: #ff4500; */
 }
 
 .text-center{
@@ -94,7 +94,7 @@ p{
 
 
 .container{
-    background: white; 
+    background: white;
     border:1px solid #cccccc;
     max-width:1024px;
 }
@@ -122,14 +122,8 @@ p{
     padding: 3px;
 }
 
-.fa-question-circle-o{
-    font-size: 12px !important;
-    color: blue;
-}
-
 .indicators{
-    background: #fab005;
-    padding-top: 25px;
+    background: #fa2a05;
 }
 
 .sumarization{
@@ -145,4 +139,17 @@ h1 p{
 
 .card .action{
     border: 10px solid blue;
+}
+
+.fa{
+    font-size: 40px !important;
+}
+
+.fa-question-circle-o{
+    font-size: 12px !important;
+    color: blue;
+}
+
+.fa-pencil-square-o{
+    font-size: 12px !important;
 }

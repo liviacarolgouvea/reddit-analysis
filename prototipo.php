@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 include_once "header.php";
-		
+
 include_once "con.php";
 
 $query = "	SELECT 	count(distinct id) AS TOTAL_POSTS,
@@ -24,7 +24,7 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 		Explore o que achar necessário para compreender o debate. Em seguida, responda ao questionário.
 	</p> -->
 	<p class="lead">
-		Below, there is the title of a topic discussion witch is a link to the discussion. And, in the yellow boxes, there are some information about this discussion.
+		Below, there is the title of a topic discussion witch is a link to the discussion. And, in the colorful cards, there are some information about this discussion.
 		Explore what you think is necessary to understand the debate. Then, answer the questionnaire.
 	</p>
 	<?php }else{?>
@@ -94,5 +94,5 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 	</div>
 	<br>
 </div>
-						
-<?php include_once "footer.php";?>		
+
+<?php include_once "footer.php";?>

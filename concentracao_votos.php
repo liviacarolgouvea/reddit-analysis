@@ -1,47 +1,49 @@
 <?php
 $query = "	SELECT 	  A.id, A.body, A.body_html,  B.MEDIA, B.DESVIO_PADRAO, (A.SCORE / B.DESVIO_PADRAO) PERCENT
-            FROM 
+            FROM
                   (
                       SELECT    id, body, body_html, ABS(score) as SCORE
                       FROM      ".$_GET['link_id']."
                   ) A
-            LEFT JOIN            
+            LEFT JOIN
                   (
                       SELECT 		AVG(ABS(score)) AS MEDIA,
-                                STD(ABS(score)) AS DESVIO_PADRAO							
+                                STD(ABS(score)) AS DESVIO_PADRAO
                       FROM 		  ".$_GET['link_id']."
                   ) B
-                              
+
             ON 			1 = 1";
-//echo "<pre>".$query."</pre>";							
+//echo "<pre>".$query."</pre>";
 $concentracao_votos = array();
 foreach($con->query($query) as $row) {
-	if($row['PERCENT'] > 3){ 
+	if($row['PERCENT'] > 3){
 		$concentracao_votos[$id] = ["body" => $row['body'], "body_html" => $row['body_html']];
- 		
+
 	}
-}	
+}
 ?>
 
 <div class="card">
-  <div class="card-header indicators">  
+  <div class="card-header indicators">
     <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
     <!-- <b>Destaque de votos</b> -->
     <?php
-    
+
     $modal_votos = "";
-    if (!empty($concentracao_votos)) { 
+    if (!empty($concentracao_votos)) {
       if(count($concentracao_votos) > 1){
-        
+
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentários se destacaram por obterem muito votos.</b></h4>"; */
+        echo "<i class='fa fa-thumbs-up'></i>";
         echo "<h4 class='card-title'>There are some much <b> popular </b> comments in votes.</h4>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
       }else{
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentário se destacou por obter muitos votos.</b></h4>"; */
+        echo "<i class='fa fa-thumbs-up'></i>";
         echo "<h4 class='card-title'>There is a much <b> popular </b> comment in votes.</h4>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
-      }      
-      foreach($concentracao_votos as $id => $value) { 
+      }
+      foreach($concentracao_votos as $id => $value) {
         if($value == "[removed];"){
           $modal_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
         }else{
@@ -60,7 +62,7 @@ foreach($con->query($query) as $row) {
           </div><br>";
         }
       }?>
-      
+
     <?php }else{
       echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
     }?>
