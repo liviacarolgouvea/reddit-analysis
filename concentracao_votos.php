@@ -36,7 +36,7 @@ foreach($con->query($query) as $row) {
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentários se destacaram por obterem muito votos.</b></h4>"; */
         echo "</div>";
         echo "<div class='card-body'>";
-        echo "Some comments received far more <b> votes </b> than others";
+        echo "Some comments received <br> far more <b> votes </b> than others";
         echo "<br><i class='fa fa-frown'></i><br>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
         echo "</div>";
@@ -47,29 +47,33 @@ foreach($con->query($query) as $row) {
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentário se destacou por obter muitos votos.</b></h4>"; */
         echo "</div>";
         echo "<div class='card-body'>";
-        echo "Many more <b> votes </b> to <br> a comment";
+        echo "One comments received <br> far more <b> votes </b> than others";
         echo "<br><i class='fa fa-frown'></i><br>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
         echo "</div>";
       }
       foreach($concentracao_votos as $key => $value) {
-        if($value == "[removed];"){
-          $modal_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
+        if($value['body'] == "[removed]"){
+          $modal_body = "This comment was removed by moderator to avoid controversy in conversation.";
+          $modal_title = "This comment was removed by moderator ...";
         }else{
+          $modal_body = $value['body_html'];
+          $modal_title = substr($value['body'],0,95).'... ';
+        }
+
           $modal_votos .= "
           <div id='#concentracao_votos". $key ."'>
             <div id='#brief_concentracao_votos". $key ."'>
-            ".substr($value['body'],0,95).'... ' . "
+            ".$modal_title. "
               <a  data-toggle='collapse' data-target='#concentracao_votos". $key ."' aria-expanded='false' aria-controls='collapseTwo'>
                 <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $key ."').style.color = 'transparent'\";></i>
                 <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $key ."').style.color = '#0c0c0c'\";></i>
               </a>
             </div>
             <div id='concentracao_votos". $key ."' class='collapse' aria-labelledby='headingTwo' data-parent='#concentracao_votos". $key ."'>".
-              $value['body_html'] ."
+              $modal_body ."
             </div>
           </div><br>";
-        }
       }?>
 
     <?php }else{

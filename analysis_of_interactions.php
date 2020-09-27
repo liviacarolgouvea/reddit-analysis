@@ -83,19 +83,27 @@ if ($_GET['link_id']) {
 
         <?php
         foreach($ultrapassou as $id => $value) {
-        $modal .= "
-          <div id='#" . $id . "'>
-            <div id='#brief_". $id ."'>
-              " .substr($value['body'],0,95).'... ' . "
-              <a  data-toggle='collapse' data-target='#". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
-                <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = 'transparent'\";></i>
-                <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = '#0c0c0c'\";></i>
-              </a>
-            </div>
-            <div id=". $id ." class='collapse' aria-labelledby='headingTwo' data-parent='#". $id ."'>" .
-               $value['body_html'] ."
-            </div>
-          </div><br>";
+          if($value['body'] == "[removed]"){
+            $modal_body = "This comment was removed by moderator to avoid controversy in conversation.";
+            $modal_title = "This comment was removed by moderator ...";
+          }else{
+            $modal_body = $value['body_html'];
+            $modal_title = substr($value['body'],0,95).'... ';
+          }
+
+          $modal .= "
+            <div id='#" . $id . "'>
+              <div id='#brief_". $id ."'>
+                " .$modal_title. "
+                <a  data-toggle='collapse' data-target='#". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
+                  <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = 'transparent'\";></i>
+                  <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_". $id ."').style.color = '#0c0c0c'\";></i>
+                </a>
+              </div>
+              <div id=". $id ." class='collapse' aria-labelledby='headingTwo' data-parent='#". $id ."'>" .
+                $modal_body ."
+              </div>
+            </div><br>";
         }?>
       <?php }else{
         echo "<h4 class='card-title'>A respostas estão bem distribuídas entre os comentários</h4>";

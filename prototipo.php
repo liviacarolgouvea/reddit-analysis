@@ -39,7 +39,7 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 	<?php }?>
 
 	<div class="row">
-		<div class="col-sm">
+		<!-- <div class="col-sm"> -->
 			<div class="card">
   				<div class="card-header">
 					  <!-- <b>					<a href="https://www.reddit.com/r/politics/comments/<?php echo $_GET['link_id']?>" target="blank">Go to discussion</a></b> -->
@@ -70,7 +70,7 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 					</div>
   				</div>
 			</div>
-		</div>
+		<!-- </div> -->
 	</div>
 <!-- 	<br>
 	<div class="row">
