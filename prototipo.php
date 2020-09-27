@@ -23,19 +23,19 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 		Abaixo temos, no primeiro quadro, o link para a discussão. No quadro azul, um breve resumo do conteúdo da discussão. E nos quadros amarelos, informações sobre a discussão.
 		Explore o que achar necessário para compreender o debate. Em seguida, responda ao questionário.
 	</p> -->
-	<p class="lead">
+<!-- 	<p class="lead">
 		Below, there is the title of a topic discussion witch is a link to the discussion. And, in the colorful cards, there are some information about this discussion.
 		Explore what you think is necessary to understand the debate. Then, answer the questionnaire.
-	</p>
+	</p> -->
 	<?php }else{?>
 <!-- 	<p class="lead">
 		Nesta página temos o link para a discussão seguido de um breve resumo dela.
 		<br>
 		Explore o que achar necessário para compreender o debate. Em seguida, responda ao questionário.
 	</p> -->
-	<p class="lead">
+<!-- 	<p class="lead">
 		Below, there is the title of the discussion topic. Click to go to the discussion, browse through it and then answer the questionnaire
-	</p>
+	</p> -->
 	<?php }?>
 
 	<div class="row">
@@ -80,19 +80,19 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 	</div> -->
 	<br>
 
-	<br>
+<!-- 	<br>
 	<div class="row">
 		<div class="col-sm">
-			<?php if($_GET['type'] ==  "indicadores"){?>
-				<!-- <a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> -->
+			<?php // if($_GET['type'] ==  "indicadores"){?>
+			 <a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfHHWLF_IYy6R2EMvE-hyPNuZWmA9ePcVq3g8yjGloT2VSUaw/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				<a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSdCmFNqE3RI3NXepQ9Vh4rjUDqiku53I9JPxlkdbABv-j5VpA/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-			<?php }else{?>
-				<!-- <a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> -->
+			<?php // }else{?>
+				 <a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSeoBfXlQRSSxgl0dOndt50lZIplapK_KQQ4qqMX7bzN3SqF5Q/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				<a class="btn btn-lg"  href="https://docs.google.com/forms/d/e/1FAIpQLSfR_I_NW7ltCQ681hXA6nWFZ-8olKpyW8UBY8kQZw9-M7SChQ/viewform?usp=sf_link" target="_blank">Answer the questionnaire <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-			<?php }?>
+			<?php // }?>
 		</div>
 	</div>
-	<br>
+	<br> -->
 </div>
 
 <?php include_once "footer.php";?>

@@ -47,24 +47,38 @@ if ($_GET['link_id']) {
 }?>
 
 <div class="card">
-  <div class="card-header indicators">
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
     <!-- <b>Análise da interação</b> -->
     <?php
     $count = count($ultrapassou);
     if (!empty($ultrapassou)) {
       if(count($ultrapassou) > 1){?>
-        <!-- <h4 class="card-title"><?php// echo $count;?> <b>comentários concentraram mais repostas.</b></h4> -->
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <h4 class="card-title">Discussion is very <b> focused </b> in some comments</h4>
-        <!-- <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/> -->
-        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+        <div class="card-header indicators">
+          <!-- <h4 class="card-title"><?php// echo $count;?> <b>comentários concentraram mais repostas.</b></h4> -->
+          <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
+          Discussion is focused in some comments
+        </div>
+        <div class="card-body">
+          Much answer in a few comments
+          <br>
+          <i class="fa fa-frown"></i>
+          <br>
+          <!-- <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/> -->
+          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+        </div>
       <?php }else{ ?>
-        <!-- <h4 class="card-title"><?php echo $count;?>  <b>comentário concentrou mais repostas.</b></h4> -->
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <h4 class="card-title">Discussion is very <b> focused </b> in one comment</h4>
-        <br>
-        <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+        <div class="card-header indicators">
+          <!-- <h4 class="card-title"><?php // echo $count;?>  <b>comentário concentrou mais repostas.</b></h4> -->
+          <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAnalysisInteraction"></i>
+          Discussion focused on a comment
+        </div>
+        <div class="card-body">
+
+          One comment had much more <b> replies </b> than the rest
+          <br>
+          <i class="fa fa-frown"></i>
+          <br>
+          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+        </div>
       <?php }?>
 
         <?php
@@ -83,12 +97,9 @@ if ($_GET['link_id']) {
             </div>
           </div><br>";
         }?>
-
-
       <?php }else{
         echo "<h4 class='card-title'>A respostas estão bem distribuídas entre os comentários</h4>";
       }?>
-  </div>
 </div>
 
 

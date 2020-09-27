@@ -1,6 +1,4 @@
 <div class="card">
-    <div class="card-header indicators" style="padding-bottom: 0px;" >
-        <!-- <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalAgeDynamics"></i> -->
         <!-- <b>Dinâmica temporal:</b> -->
         <!-- <h4 class="card-title">Evolução temporal dos comentários</h4> -->
         <?php
@@ -45,7 +43,7 @@
                     $age = "Esta discussão teve mais postagens no início (explosão inicial).";
                 }elseif($row['LOCALIZACAO'] == 'SEGUNDO_DIA' && $row['PORCENTAGEM'] <= 0.30) {
                     //$age = "Esta discussão começou quente mas esfriou no segundo dia";
-                    $age = "Hot only on the <b> first day </b>";
+                    $age = "Discussion was hotter in the first day";
                 }else{
 
                     $age = "";
@@ -68,10 +66,13 @@
             $line_chart[] = [$row['DIA'],1*$row['QTD_COMENTARIOS']]; // NECESSÁRIO  MULTIPLICAR O VALOR POR 1 PARA PASSAR COMO O VALOR INTEGER POIS ESTAVA SENDO RECONHECIDO COMO STRING
         }
         $json = json_encode($line_chart);
-        echo "<h4 class='card-title'>".$age."</h4>"; ?>
+        echo "<div class='card-header indicators' style='padding-bottom: 0px;'>";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalAgeDynamics'></i>";
+        echo $age;
+        echo "</div>";
+        ?>
         <!--Div that will hold the chart-->
         <div id="chart_div" style="border:1px solid #eeeeee"></div>
-  </div>
 </div>
 
 <!-- Modal -->
@@ -79,25 +80,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalAgeDynamicsLabel">Dinâmica temporal</h5>
+        <h5 class="modal-title" id="modalAgeDynamicsLabel">Time dynamics</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Pode-se identificar 4 tipos de comportamento na evolução das postagens na discussão:
+        <!-- Pode-se identificar 4 tipos de comportamento na evolução das postagens na discussão: -->
+        Discussions use to have 4 behavior types in the evolution of posts:
             <ul>
                 <li>
-                    Discussões com comportamento explosivo, que duram apenas um dia.
+                    <!-- Discussões com comportamento explosivo, que duram apenas um dia. -->
+                    Explosive behavior discussions, which last only one day.
                 </li>
                 <li>
-                    Discussões que ficam mais acaloradas no primeiro dia e depois esfriam.
+                    <!-- Discussões que ficam mais acaloradas no primeiro dia e depois esfriam. -->
+                    Discussions that get hotter on the first day and then cool down.
                 </li>
                 <li>
-                    Discussões que tem quantidade de comentários constantes ao longo da vida.
+                    <!-- Discussões que tem quantidade de comentários constantes ao longo da vida. -->
+                    Discussions that have a constant amount of comments throughout life.
                 </li>
                 <li>
-                    Discussões que começam sem intensidade e ficam acaloradas após alguns dias, no final de sua vida.
+                    <!-- Discussões que começam sem intensidade e ficam acaloradas após alguns dias, no final de sua vida. -->
+                    Discussions that begin without intensity and become heated after a few days, at the end of your life.
                 </li>
             </ul>
       </div>
@@ -129,8 +135,8 @@
     // Set chart options
     var options = {'title':'Posts x day',
                     'width':200,
-                    'height':150,
-                    'backgroundColor': '#ff4500',
+                    'height':155,
+                    'backgroundColor': '#fff',
                     'colors': ['#000'],
 
                     legend: {position: 'none'},

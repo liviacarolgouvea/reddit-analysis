@@ -17,46 +17,55 @@ $query = "	SELECT 	  A.id, A.body, A.body_html,  B.MEDIA, B.DESVIO_PADRAO, (A.SC
 $concentracao_votos = array();
 foreach($con->query($query) as $row) {
 	if($row['PERCENT'] > 3){
-		$concentracao_votos[$id] = ["body" => $row['body'], "body_html" => $row['body_html']];
+		$concentracao_votos[$row["id"]] = ["body" => $row['body'], "body_html" => $row['body_html']];
 
 	}
 }
 ?>
 
 <div class="card">
-  <div class="card-header indicators">
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalConcentracaoVotos"></i>
     <!-- <b>Destaque de votos</b> -->
     <?php
 
     $modal_votos = "";
     if (!empty($concentracao_votos)) {
       if(count($concentracao_votos) > 1){
-
+        echo "<div class='card-header indicators'>";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalConcentracaoVotos'></i>";
+        echo "There are some popular comments";
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentários se destacaram por obterem muito votos.</b></h4>"; */
-        echo "<i class='fa fa-thumbs-up'></i>";
-        echo "<h4 class='card-title'>There are some much <b> popular </b> comments in votes.</h4>";
+        echo "</div>";
+        echo "<div class='card-body'>";
+        echo "Some comments received far more <b> votes </b> than others";
+        echo "<br><i class='fa fa-frown'></i><br>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
+        echo "</div>";
       }else{
+        echo "<div class='card-header indicators'>";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalConcentracaoVotos'></i>";
+        echo "There is a popular comment";
         /* echo "<h4 class='card-title'>".count($concentracao_votos)." <b>comentário se destacou por obter muitos votos.</b></h4>"; */
-        echo "<i class='fa fa-thumbs-up'></i>";
-        echo "<h4 class='card-title'>There is a much <b> popular </b> comment in votes.</h4>";
+        echo "</div>";
+        echo "<div class='card-body'>";
+        echo "Many more <b> votes </b> to <br> a comment";
+        echo "<br><i class='fa fa-frown'></i><br>";
         echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
+        echo "</div>";
       }
-      foreach($concentracao_votos as $id => $value) {
+      foreach($concentracao_votos as $key => $value) {
         if($value == "[removed];"){
           $modal_votos = "O comentário foi removido pelo moderador por ser um possível gerador de conflito";
         }else{
           $modal_votos .= "
-          <div id='#concentracao_votos". $id ."'>
-            <div id='#brief_concentracao_votos". $id ."'>
+          <div id='#concentracao_votos". $key ."'>
+            <div id='#brief_concentracao_votos". $key ."'>
             ".substr($value['body'],0,95).'... ' . "
-              <a  data-toggle='collapse' data-target='#concentracao_votos". $id ."' aria-expanded='false' aria-controls='collapseTwo'>
-                <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = 'transparent'\";></i>
-                <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $id ."').style.color = '#0c0c0c'\";></i>
+              <a  data-toggle='collapse' data-target='#concentracao_votos". $key ."' aria-expanded='false' aria-controls='collapseTwo'>
+                <i class='fa fa-plus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $key ."').style.color = 'transparent'\";></i>
+                <i class='fa fa-minus-square-o' onclick=\"document.getElementById('#brief_concentracao_votos" . $key ."').style.color = '#0c0c0c'\";></i>
               </a>
             </div>
-            <div id='concentracao_votos". $id ."' class='collapse' aria-labelledby='headingTwo' data-parent='#concentracao_votos". $id ."'>".
+            <div id='concentracao_votos". $key ."' class='collapse' aria-labelledby='headingTwo' data-parent='#concentracao_votos". $key ."'>".
               $value['body_html'] ."
             </div>
           </div><br>";
@@ -66,7 +75,6 @@ foreach($con->query($query) as $row) {
     <?php }else{
       echo "<p class='card-title'>A respostas etão bem distribuídas aos comentários</p>";
     }?>
-  </div>
 </div>
 
 <!-- Modal -->

@@ -1,6 +1,4 @@
 <div class="card">
-  <div class="card-header indicators" style="background: #72de14;">
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalSignaturesOfControversies"></i>
     <!-- <b>Medida de controvérsia:</b> -->
       <?php
       $sql_controversy = "SELECT TOTAL_COMMENTS, DELETED, (DELETED / TOTAL_COMMENTS) * 100 AS PORCENTAGEM
@@ -26,20 +24,37 @@
       $result->execute();
       $row_controversy = $result->fetchAll(\PDO::FETCH_ASSOC);
       if(round($row_controversy[0]['PORCENTAGEM'],1) == 0){
+        echo "<div class='card-header indicators' >";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalSignaturesOfControversies'></i>";
         /* echo "<h4 class='card-title'><b>Nenhum comentário ofensivo foi detectado.</b></h4>"; */
-        echo "<i class='fa fa-fire-extinguisher'></i>";
-        echo "<h4 class='card-title'>No extremely <b>heated</b> comments were identified.</h4>";
-      }elseif(round($row_controversy[0]['PORCENTAGEM'],1) >= 20){
+        echo "No controversial comments";
+        echo "</div>";
+        echo "<div class='card-body'>";
+        echo "Moderators didn't have to <b> remove </b> any comment.";
+        echo "<br><i class='fa fa-smile'></i><br>";
+        echo "</div>";
+
+      }elseif(round($row_controversy[0]['PORCENTAGEM'],1) > 0 && round($row_controversy[0]['PORCENTAGEM'],1) <= 20){
+        echo "<div class='card-header indicators' >";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalSignaturesOfControversies'></i>";
         /* echo "<h4 class='card-title'>Esta conversa está bastante controversa</h4>"; */
-        echo "<i class='fa fa-fire-extinguisher'></i>";
-        echo "<h4 class='card-title'>Many extremely <b>heated</b> comments were identified</h4>";
+        echo "Some controversial comments";
+        echo "</div>";
+        echo "<div class='card-body'>";
+        echo "Moderators had to <b> remove </b> some comments";
+        echo "<br><i class='fa fa-frown'></i><br>";
+        echo "</div>";
       }else{
+        echo "<div class='card-header indicators' >";
+        echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalSignaturesOfControversies'></i>";
         /* echo "<h4 class='card-title'>Esta discussão está um pouco controversa</h4>"; */
-        echo "<i class='fa fa-fire-extinguisher'></i>";
-        echo "<h4 class='card-title'>Some extremely <b>exalted</b> comments extremely</h4>";
+        echo "Many controversial comments";
+        echo "</div>";
+        echo "<div class='card-body'><br>";
+        echo "Moderators had to remove <b> many </b> comments";
+        echo "<i class='fa fa-frown'></i>";
+        echo "</div>";
       }?>
-      <input type="button" class="btn" value="" />
-  </div>
 </div>
 
 <!-- Modal -->

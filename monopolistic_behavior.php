@@ -1,6 +1,5 @@
 <div class="card">
-  <div class="card-header indicators">
-    <i class="fa fa-question-circle-o" aria-hidden="true" data-toggle="modal" data-target="#modalMonopolisticBehavior"></i>
+
     <!-- <b>Comportamento monopolista: </b> -->
       <?php
       $query = "SELECT			A.author,
@@ -50,16 +49,25 @@
         $count = count($authors);
         if(count($authors) > 1){
           /* echo "<h4 class='card-title'>".$count." <b>autores falaram mais que o restante.</b></h4>"; */
-          echo "<i class='fa fa-users'></i>";
-          echo "<h4 class='card-title'>Discussion is <b> monopolized </b> by some participants</h4>";
-          echo "<br>";
+          echo "<div class='card-header indicators'>";
+          echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalMonopolisticBehavior'></i>";
+          echo "Discussion is monopolized";
+          echo "</div>";
+          echo "<div class='card-body'>";
+          echo "Some participants <b> posted </b> much more than the rest";
+          echo "<br><i class='fa fa-frown'></i><br>";
           echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
+          echo "</div>";
         }else{
           /* echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>"; */
-          echo "<i class='fa fa-users'></i>";
-          echo "<h4 class='card-title'>Discussion is <b> monopolized </b> one participants</h4>";
-          echo "<br>";
+          echo "<div class='card-header indicators'>";
+          echo "<i class='fa fa-question-circle-o' aria-hidden='true' data-toggle='modal' data-target='#modalMonopolisticBehavior'></i>";
+          echo "Discussion is <b> monopolized </b> one participants";
+          echo "</div>";
+          echo "<div class='card-body'>";
+          echo "<i class='fa fa-frown'></i><br>";
           echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
+          echo "</div>";
         }
         foreach ($authors as $id => $value) {
           $modal_authors .= "<div style='margin-left:40%'><img src='img/avatar_1.png' width='20px'>
@@ -67,9 +75,8 @@
                             </div><br>";
         }
       }?>
-      <br>
-  </div>
 </div>
+
 
 
 <!-- Modal -->
