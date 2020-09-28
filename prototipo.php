@@ -42,12 +42,15 @@ $row_caracteristica_conversa = $stmt->fetchAll();
 		<!-- <div class="col-sm"> -->
 			<div class="card">
   				<div class="card-header">
-					  <!-- <b>					<a href="https://www.reddit.com/r/politics/comments/<?php echo $_GET['link_id']?>" target="blank">Go to discussion</a></b> -->
-					<blockquote class="reddit-card" data-card-created="1597519765" data-card-preview="0">
-						<a href="https://www.reddit.com/r/politics/comments/<?php echo $_GET['link_id']?>/"></a>
-					</blockquote>
-					<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+					<div style="background: white; width:500px; margin: 0 auto">
+						<!-- <b>					<a href="https://www.reddit.com/r/politics/comments/<?php // echo $_GET['link_id']?>" target="blank">Go to discussion</a></b> -->
+						<blockquote class="reddit-card" data-card-created="1597519765" data-card-preview="0">
+							<a href="https://www.reddit.com/r/politics/comments/<?php echo $_GET['link_id']?>/"></a>
+						</blockquote>
+						<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+					</div>
 
+					<br>
 					<div class="row">
 						<?php if($_GET['type'] ==  "indicadores"){?>
 							<div class="col-sm">

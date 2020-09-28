@@ -15,11 +15,11 @@ $chrome = strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome') ?  true : false;
 
 if(!$chrome){
 
-    echo "<h2 style='text-align:center;margin-top:10%'>Please open this experiment in a Chrome browser<h2>";
+    echo "<h2 style='text-align:center;margin-top:10%'>Please, open this experiment in a Chrome browser<h2>";
 
 }elseif($_GET['screenwidth']){
 
-    echo "<h2 style='text-align:center;margin-top:10%'>Please open this experiment on a larger screen<h2>";
+    echo "<h2 style='text-align:center;margin-top:10%'>Please, open this experiment on a larger screen<h2>";
 
 }else{
 
