@@ -63,7 +63,7 @@ if ($_GET['link_id']) {
           <i class="fa fa-frown"></i>
           <br>
           <!-- <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="Veja quais são"/> -->
-          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View comments"/>
         </div>
       <?php }else{ ?>
         <div class="card-header indicators">
@@ -77,7 +77,7 @@ if ($_GET['link_id']) {
           <br>
           <i class="fa fa-frown"></i>
           <br>
-          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View"/>
+          <input type="button" class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#modalComments" value="View comments"/>
         </div>
       <?php }?>
 

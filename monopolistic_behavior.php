@@ -56,7 +56,7 @@
           echo "<div class='card-body'>";
           echo "Some participants <b> posted </b> much more than the rest";
           echo "<br><i class='fa fa-frown'></i><br>";
-          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View authors'/>";
           echo "</div>";
         }else{
           /* echo "<h4 class='card-title'>".$count." <b>autor falou mais que o restante.</b></h4>"; */
@@ -66,7 +66,7 @@
           echo "</div>";
           echo "<div class='card-body'>";
           echo "<i class='fa fa-frown'></i><br>";
-          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View'/>";
+          echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalAuthors' value='View authors'/>";
           echo "</div>";
         }
         foreach ($authors as $id => $value) {

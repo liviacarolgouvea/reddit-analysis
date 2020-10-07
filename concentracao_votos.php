@@ -38,7 +38,7 @@ foreach($con->query($query) as $row) {
         echo "<div class='card-body'>";
         echo "Some comments received <br> far more <b> votes </b> than others";
         echo "<br><i class='fa fa-frown'></i><br>";
-        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View comments'/>";
         echo "</div>";
       }else{
         echo "<div class='card-header indicators'>";
@@ -49,7 +49,7 @@ foreach($con->query($query) as $row) {
         echo "<div class='card-body'>";
         echo "One comments received <br> far more <b> votes </b> than others";
         echo "<br><i class='fa fa-frown'></i><br>";
-        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View'/>";
+        echo "<input type='button' class='btn btn-primary' aria-hidden='true' data-toggle='modal' data-target='#modalCommentsVotes' value='View comments'/>";
         echo "</div>";
       }
       foreach($concentracao_votos as $key => $value) {
